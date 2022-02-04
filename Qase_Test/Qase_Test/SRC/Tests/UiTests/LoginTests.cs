@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Qase_Test.BaseEntity;
 using Qase_Test.Core;
+using Qase_Test.Fakers;
 using Qase_Test.Steps.UiSteps;
 
 namespace Qase_Test.Tests.UiTests
@@ -20,7 +21,7 @@ namespace Qase_Test.Tests.UiTests
         public void LoginWithWrongPasswordTest()
         {
             var loginSteps = new LoginSteps(BrowsersService);
-            loginSteps.Login(ReadProperties.Email, ReadProperties.WrongPassword);
+            loginSteps.Login(UserFaker.GetFakeUser().Email, UserFaker.GetFakeUser().Password);
 
             Assert.Multiple(() =>
             {

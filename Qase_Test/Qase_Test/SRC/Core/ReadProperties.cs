@@ -39,7 +39,6 @@ namespace Qase_Test.Core
         public static TimeSpan Timeout => TimeSpan.FromSeconds(Convert.ToDouble(Configuration[nameof(Timeout)]));
         public static string Email => Configuration[nameof(Email)];
         public static string Password => Configuration[nameof(Password)];
-        public static string WrongPassword => Configuration[nameof(WrongPassword)];
         public static string ProjectName => Configuration[nameof(ProjectName)];
         public static string ProjectCode => Configuration[nameof(ProjectCode)];
         public static string WrongProjectName => Configuration[nameof(WrongProjectName)];

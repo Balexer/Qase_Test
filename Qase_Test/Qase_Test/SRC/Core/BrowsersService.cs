@@ -11,12 +11,9 @@ namespace Qase_Test.Core
     {
         private readonly IWebDriver _driver;
         private readonly Waiters _waiters;
-        private readonly string _baseUrl;
 
         public BrowsersService()
         {
-            _baseUrl = ReadProperties.Url;
-
             switch (ReadProperties.Browser.ToLower())
             {
                 //DEV_NOTE: I will realise more browsers
