@@ -7,7 +7,7 @@ namespace Qase_Test.BaseEntity
     [AllureNUnit]
     public abstract class BaseTest
     {
-        public BrowsersService BrowsersService;
+        protected BrowsersService BrowsersService;
 
         [SetUp]
         public void OpenPage()
@@ -20,7 +20,6 @@ namespace Qase_Test.BaseEntity
         public void ClosePage()
         {
             BrowsersService.GetDriver().Quit();
-            BrowsersService = null;
         }
     }
 }

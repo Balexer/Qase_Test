@@ -1,35 +1,33 @@
-using NUnit.Framework;
+using OpenQA.Selenium;
 using Qase_Test.Core;
 
 namespace Qase_Test.BaseEntity
 {
     public abstract class BasePage
     {
-        protected static readonly int WAIT_FOR_PAGE_LOAD_IN_SECONDS = 5;
         protected readonly BrowsersService BrowsersService;
+        private readonly By _locator;
 
-        public abstract bool IsPageOpened();
-
-        public BasePage(BrowsersService browsersService)
+        protected BasePage(BrowsersService browsersService, By locator)
         {
-            this.BrowsersService = browsersService;
-            WaitForOpen();
+            BrowsersService = browsersService;
+            _locator = locator;
         }
 
-        protected void WaitForOpen()
+        protected bool WaitForOpen()
         {
-            var secondCount = 0;
-            var isPageOpenedIndicator = IsPageOpened();
-            while (!isPageOpenedIndicator && secondCount < WAIT_FOR_PAGE_LOAD_IN_SECONDS)
+            try
             {
-                BrowsersService.sleep(1000);
-                secondCount++;
-                isPageOpenedIndicator = IsPageOpened();
+                var isOpened = BrowsersService.GetWaiters().WaitForVisibility(_locator).Displayed;
+                return isOpened;
             }
-
-            if (!isPageOpenedIndicator)
+            catch (NoSuchElementException)
             {
-                throw new AssertionException("Page was not opened");
+                return false;
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
             }
         }
     }

@@ -4,11 +4,11 @@ namespace Qase_Test.BaseEntity
 {
     public class BaseStep
     {
-        public BrowsersService browsersService;
+        protected readonly BrowsersService BrowsersService;
 
-        public BaseStep(BrowsersService browsersService)
+        protected BaseStep(BrowsersService browsersService)
         {
-            this.browsersService = browsersService;
+            BrowsersService = browsersService;
         }
     }
 }

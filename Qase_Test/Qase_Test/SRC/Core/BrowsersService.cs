@@ -9,56 +9,37 @@ namespace Qase_Test.Core
 {
     public class BrowsersService
     {
-        private IWebDriver driver = null;
-        private Waiters waiters;
-        private string baseUrl;
+        private readonly IWebDriver _driver;
+        private readonly Waiters _waiters;
+        private readonly string _baseUrl;
 
         public BrowsersService()
         {
-            baseUrl = ReadProperties.Url;
+            _baseUrl = ReadProperties.Url;
 
             switch (ReadProperties.Browser.ToLower())
             {
+                //DEV_NOTE: I will realise more browsers
                 case "chrome":
                     new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
                     var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("--disable-gpu");
-                    chromeOptions.AddArguments("--ignore-certificate-errors");
-                    chromeOptions.AddArguments("--silent");
-                    chromeOptions.AddArguments("--start-maximized");
-                    driver = new ChromeDriver(chromeOptions);
+                    chromeOptions.AddArguments("--disable-gpu", "--ignore-certificate-errors", "--silent",
+                        "--start-maximized");
+                    _driver = new ChromeDriver(chromeOptions);
                     break;
             }
 
-            waiters = new Waiters(driver, ReadProperties.Timeout);
+            _waiters = new Waiters(_driver, ReadProperties.Timeout);
         }
 
         public IWebDriver GetDriver()
         {
-            return driver;
+            return _driver;
         }
 
         public Waiters GetWaiters()
         {
-            return waiters;
-        }
-
-        public string GetBaseUrl()
-        {
-            return baseUrl;
-        }
-
-        public void sleep(long millis)
-        {
-            
-            try
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(Convert.ToDouble(millis)));
-            }
-            catch (ThreadInterruptedException)
-            {
-                Console.WriteLine();
-            }
+            return _waiters;
         }
     }
 }

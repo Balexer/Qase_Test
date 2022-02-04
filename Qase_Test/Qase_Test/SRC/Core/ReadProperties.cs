@@ -5,17 +5,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace Qase_Test.Core
 {
-    public class ReadProperties
+    public static class ReadProperties
     {
-        private static readonly Lazy<IConfiguration> s_configuration;
-        public static IConfiguration Configuration => s_configuration.Value;
+        private static readonly Lazy<IConfiguration> SConfiguration;
+        private static IConfiguration Configuration => SConfiguration.Value;
+
         private static IConfiguration BuildConfiguration()
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(basePath)//QaseProjectTest/src/Resources/appSettings.json
-                .AddJsonFile($@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}appSettings.json");
+                .SetBasePath(basePath)
+                .AddJsonFile(
+                    $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}appSettings.json");
 
             var appSettingFiles = Directory.EnumerateFiles(basePath, "appsettings.*.json");
 
@@ -26,12 +28,12 @@ namespace Qase_Test.Core
 
             return builder.Build();
         }
-        
+
         static ReadProperties()
         {
-          s_configuration = new Lazy<IConfiguration>(BuildConfiguration);
+            SConfiguration = new Lazy<IConfiguration>(BuildConfiguration);
         }
-        
+
         public static string Url => Configuration[nameof(Url)];
         public static string Browser => Configuration[nameof(Browser)];
         public static TimeSpan Timeout => TimeSpan.FromSeconds(Convert.ToDouble(Configuration[nameof(Timeout)]));
@@ -49,7 +51,5 @@ namespace Qase_Test.Core
         public static string MemberToken => Configuration[nameof(MemberToken)];
         public static string AnotherProjectCode => Configuration[nameof(AnotherProjectCode)];
         public static string HomeUrl => Configuration[nameof(HomeUrl)];
-
-
     }
 }

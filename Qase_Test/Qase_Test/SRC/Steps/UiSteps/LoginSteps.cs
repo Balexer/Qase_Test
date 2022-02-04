@@ -10,24 +10,21 @@ namespace Qase_Test.Steps.UiSteps
         {
         }
 
+        private LoginPage LoginPage() =>
+            new(BrowsersService);
+
         public void Login(string email, string password)
         {
-            var loginPage = new LoginPage(browsersService);
-            loginPage.SetEmail(email);
-            loginPage.SetPassword(password);
-            loginPage.LoginButtonClick();
+            LoginPage().SetEmail(email);
+            LoginPage().SetPassword(password);
+            LoginPage().LoginButtonClick();
         }
 
-        public string GetErrorMessage()
-        {
-            var loginPage = new LoginPage(browsersService);
-            return loginPage.GetErrorMessage();
-        }
-        
-        public bool IsPageOpened()
-        {
-            var loginPage = new LoginPage(browsersService);
-            return loginPage.IsPageOpened();
-        }
+        public string GetErrorMessage() =>
+            LoginPage().GetErrorMessage();
+
+
+        public bool IsPageOpened() =>
+            LoginPage().IsPageOpened();
     }
 }
