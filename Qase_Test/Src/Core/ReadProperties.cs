@@ -39,16 +39,6 @@ namespace Qase_Test.Core
         public static TimeSpan Timeout => TimeSpan.FromSeconds(Convert.ToDouble(Configuration[nameof(Timeout)]));
         public static string Email => Configuration[nameof(Email)];
         public static string Password => Configuration[nameof(Password)];
-        public static string ProjectName => Configuration[nameof(ProjectName)];
-        public static string ProjectCode => Configuration[nameof(ProjectCode)];
-        public static string WrongProjectName => Configuration[nameof(WrongProjectName)];
-        public static string ProjectDescription => Configuration[nameof(ProjectDescription)];
-        public static string TestCaseName => Configuration[nameof(TestCaseName)];
-        public static string EmptyTestCaseName => Configuration[nameof(EmptyTestCaseName)];
-        public static string ExistingProjectCode => Configuration[nameof(ExistingProjectCode)];
-        public static string Token => Configuration[nameof(Token)];
-        public static string MemberToken => Configuration[nameof(MemberToken)];
-        public static string AnotherProjectCode => Configuration[nameof(AnotherProjectCode)];
         public static string HomeUrl => Configuration[nameof(HomeUrl)];
     }
 }

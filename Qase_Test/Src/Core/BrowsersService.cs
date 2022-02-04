@@ -19,10 +19,10 @@ namespace Qase_Test.Core
                 //DEV_NOTE: I will realise more browsers
                 case "chrome":
                     new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-                    var chromeOptions = new ChromeOptions();
-                    chromeOptions.AddArguments("--disable-gpu", "--ignore-certificate-errors", "--silent",
-                        "--start-maximized");
-                    _driver = new ChromeDriver(chromeOptions);
+                    _driver = new ChromeDriver(BrowsersOptions.GetChromeOptions());
+                    break;
+                default:
+                    Console.WriteLine($"Browser {ReadProperties.Browser} is not supported");
                     break;
             }
 
