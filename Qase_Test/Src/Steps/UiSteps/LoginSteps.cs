@@ -1,6 +1,6 @@
-using Qase_Test.BaseEntity;
 using Qase_Test.Core;
 using Qase_Test.Pages;
+using Qase_Test.Steps.Base;
 
 namespace Qase_Test.Steps.UiSteps
 {

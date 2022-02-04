@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using Qase_Test.Core;
 
-namespace Qase_Test.BaseEntity
+namespace Qase_Test.Pages.Base
 {
     public abstract class BasePage
     {

@@ -2,7 +2,7 @@ using NUnit.Allure.Core;
 using NUnit.Framework;
 using Qase_Test.Core;
 
-namespace Qase_Test.BaseEntity
+namespace Qase_Test.Tests.Base
 {
     [AllureNUnit]
     public abstract class BaseTest

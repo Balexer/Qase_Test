@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using Qase_Test.BaseEntity;
 using Qase_Test.Core;
 using Qase_Test.Fakers;
 using Qase_Test.Steps.UiSteps;
+using Qase_Test.Tests.Base;
 
 namespace Qase_Test.Tests.UiTests
 {

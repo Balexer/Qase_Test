@@ -1,8 +1,7 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
-using Qase_Test.BaseEntity;
 using Qase_Test.Core;
-using Qase_Test.Utils;
+using Qase_Test.Pages.Base;
+
 
 namespace Qase_Test.Pages
 {

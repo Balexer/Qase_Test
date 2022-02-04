@@ -1,6 +1,6 @@
 using Qase_Test.Core;
 
-namespace Qase_Test.BaseEntity
+namespace Qase_Test.Steps.Base
 {
     public class BaseStep
     {
