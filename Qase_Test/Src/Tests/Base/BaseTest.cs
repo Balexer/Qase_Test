@@ -13,6 +13,8 @@ namespace Qase_Test.Tests.Base
         public void OpenPage()
         {
             BrowsersService = new BrowsersService();
+            BrowsersService.SetupBrowser();
+            BrowsersService.SetupWaiters();
             BrowsersService.GetDriver().Navigate().GoToUrl(ReadProperties.Url);
         }
 

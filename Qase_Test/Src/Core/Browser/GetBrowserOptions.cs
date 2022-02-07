@@ -1,8 +1,8 @@
 using OpenQA.Selenium.Chrome;
 
-namespace Qase_Test.Utils
+namespace Qase_Test.Core.Browser
 {
-    public static class BrowsersOptions
+    public static class GetBrowserOptions
     {
         public static ChromeOptions GetChromeOptions()
         {

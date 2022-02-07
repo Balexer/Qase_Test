@@ -1,3 +1,5 @@
+using System;
+using System.Security.Claims;
 using OpenQA.Selenium;
 using Qase_Test.Core;
 
@@ -18,11 +20,11 @@ namespace Qase_Test.Pages.Base
         {
             try
             {
-                var isOpened = BrowsersService.GetWaiters().WaitForVisibility(_locator).Displayed;
-                return isOpened;
+                return BrowsersService.GetWaiters().WaitForVisibility(_locator).Displayed;
             }
-            catch (NoSuchElementException)
+            catch (NoSuchElementException e)
             {
+                // Console.WriteLine("error message");
                 return false;
             }
             catch (WebDriverTimeoutException)

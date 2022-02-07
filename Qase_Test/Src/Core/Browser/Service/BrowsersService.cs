@@ -1,34 +1,36 @@
 using System;
-using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Qase_Test.Core.Browser;
 using Qase_Test.Utils;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace Qase_Test.Core
 {
     public class BrowsersService
     {
-        private readonly IWebDriver _driver;
-        private readonly Waiters _waiters;
+        private IWebDriver _driver;
+        private Waiters _waiters;
+        private const string Chrome = "chrome";
+        
+        
 
-        public BrowsersService()
+        public void SetupBrowser()
         {
             switch (ReadProperties.Browser.ToLower())
             {
                 //DEV_NOTE: I will realise more browsers
-                case "chrome":
-                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
-                    _driver = new ChromeDriver(BrowsersOptions.GetChromeOptions());
+                case Chrome:
+                    _driver = new ChromeDriver(GetBrowserOptions.GetChromeOptions());
                     break;
                 default:
                     Console.WriteLine($"Browser {ReadProperties.Browser} is not supported");
                     break;
             }
-
-            _waiters = new Waiters(_driver, ReadProperties.Timeout);
         }
 
+        public void SetupWaiters() =>
+            _waiters = new Waiters(_driver, ReadProperties.Timeout);
+        
         public IWebDriver GetDriver()
         {
             return _driver;
