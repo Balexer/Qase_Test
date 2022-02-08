@@ -2,7 +2,7 @@ using Qase_Test.Core;
 
 namespace Qase_Test.Models
 {
-    public class Settings
+    public static class Settings
     {
         public static User GetUser() =>
             new()

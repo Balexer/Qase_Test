@@ -1,5 +1,5 @@
 using OpenQA.Selenium;
-using Qase_Test.Core;
+using Qase_Test.Core.Browser.Service;
 using Qase_Test.Pages.Base;
 
 
@@ -13,14 +13,12 @@ namespace Qase_Test.Pages
         private const string ErrorMessageSelector = "form-control-feedback";
         private static readonly By LogInPageSelector = By.Id("Symbols");
 
-        public LoginPage(BrowsersService browsersService) : base(browsersService, LogInPageSelector)
+        public LoginPage() : base(LogInPageSelector)
         {
         }
 
-        public bool IsPageOpened() => WaitForOpen();
-
-        private IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters().WaitForVisibility(locator);
+        private static IWebElement GetElement(By locator) =>
+            BrowsersService.GetWaiters.WaitForVisibility(locator);
 
         public void SetEmail(string email) =>
             GetElement(_inputLoginSelector).SendKeys(email);

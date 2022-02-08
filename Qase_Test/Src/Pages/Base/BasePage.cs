@@ -1,34 +1,33 @@
-using System;
-using System.Security.Claims;
+using NLog;
 using OpenQA.Selenium;
-using Qase_Test.Core;
+using Qase_Test.Core.Browser.Service;
 
 namespace Qase_Test.Pages.Base
 {
     public abstract class BasePage
     {
-        protected readonly BrowsersService BrowsersService;
         private readonly By _locator;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        protected BasePage(BrowsersService browsersService, By locator)
+        protected BasePage(By locator)
         {
-            BrowsersService = browsersService;
             _locator = locator;
         }
 
-        protected bool WaitForOpen()
+        public bool WaitForOpen()
         {
             try
             {
-                return BrowsersService.GetWaiters().WaitForVisibility(_locator).Displayed;
+                return BrowsersService.GetWaiters.WaitForVisibility(_locator).Displayed;
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException ex)
             {
-                // Console.WriteLine("error message");
+                Logger.Info(ex);
                 return false;
             }
-            catch (WebDriverTimeoutException)
+            catch (WebDriverTimeoutException ex)
             {
+                Logger.Info(ex);
                 return false;
             }
         }

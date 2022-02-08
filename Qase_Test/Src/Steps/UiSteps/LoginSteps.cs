@@ -1,20 +1,16 @@
-using Qase_Test.Core;
 using Qase_Test.Models;
 using Qase_Test.Pages;
-using Qase_Test.Steps.Base;
 
 namespace Qase_Test.Steps.UiSteps
 {
-    public class LoginSteps : BaseStep
+    public class LoginSteps
     {
         private readonly LoginPage _loginPage;
-        public LoginSteps(BrowsersService browsersService)
-        {
-            _loginPage = new LoginPage(browsersService);
-        }
 
-        // private LoginPage LoginPage() =>
-        //     new(BrowsersService);
+        public LoginSteps()
+        {
+            _loginPage = new LoginPage();
+        }
 
         public void Login(User user)
         {
@@ -27,6 +23,6 @@ namespace Qase_Test.Steps.UiSteps
             _loginPage.GetErrorMessage();
 
         public bool IsPageOpened() =>
-            _loginPage.IsPageOpened();
+            _loginPage.WaitForOpen();
     }
 }

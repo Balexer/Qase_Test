@@ -8,19 +8,19 @@ namespace Qase_Test.Core
     public static class ReadProperties
     {
         private static readonly Lazy<IConfiguration> Configurations;
-        
+
         private static IConfiguration Configuration => Configurations.Value;
-        
+
         public static string Url => Configuration[nameof(Url)];
-        
+
         public static string Browser => Configuration[nameof(Browser)];
-        
+
         public static TimeSpan Timeout => TimeSpan.FromSeconds(Convert.ToDouble(Configuration[nameof(Timeout)]));
-        
+
         public static string Email => Configuration[nameof(Email)];
-        
+
         public static string Password => Configuration[nameof(Password)];
-        
+
         public static string HomeUrl => Configuration[nameof(HomeUrl)];
 
         private static IConfiguration BuildConfiguration()
