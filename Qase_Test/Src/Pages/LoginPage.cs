@@ -2,7 +2,6 @@ using OpenQA.Selenium;
 using Qase_Test.Core.Browser.Service;
 using Qase_Test.Pages.Base;
 
-
 namespace Qase_Test.Pages
 {
     public class LoginPage : BasePage

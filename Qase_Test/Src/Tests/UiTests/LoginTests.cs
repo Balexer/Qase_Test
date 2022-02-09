@@ -1,3 +1,6 @@
+using FluentAssertions;
+using FluentAssertions.Execution;
+using NUnit.Allure.Attributes;
 using NUnit.Framework;
 using Qase_Test.Core;
 using Qase_Test.Core.Browser.Service;
@@ -22,25 +25,32 @@ namespace Qase_Test.Tests.UiTests
         }
 
         [Test]
+        [AllureSubSuite("Log In")]
+        [AllureStep("LogIn with correct credentials")]
+        [AllureLink("Test Case", "https://app.qase.io/project/AA?previewMode=side&view=1&suite=3&case=30")]
         public void LoginTest()
         {
-            _loginSteps.Login(Settings.GetUser());
+            _loginSteps.Login(ModelsSettings.GetUser());
 
-            Assert.AreEqual(BrowsersService.GetDriver.Url, ReadProperties.HomeUrl, "HomePage didn't open");
-            Assert.True(_homePage.WaitForOpen(), "HomePage didn't open");
+            using (new AssertionScope())
+            {
+                BrowsersService.GetDriver.Url.Should().Be(ReadProperties.HomeUrl);
+                _homePage.WaitForOpen().Should().BeTrue();
+            }
         }
 
         [Test]
-        public void LoginWithWrongPasswordTest()
+        [AllureSubSuite("Log In")]
+        [AllureStep("LogIn with incorrect credentials")]
+        public void LoginWithWrongCreedsTest()
         {
             _loginSteps.Login(UserFaker.GetFakeUser());
 
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
-                Assert.AreEqual("These credentials do not match our records.", _loginSteps.GetErrorMessage(),
-                    "Error message isn't visible");
-                Assert.True(_loginSteps.IsPageOpened(), "This is another page");
-            });
+                _loginSteps.GetErrorMessage().Should().Be("These credentials do not match our records.");
+                _loginSteps.IsPageOpened().Should().BeTrue();
+            }
         }
     }
 }

@@ -8,14 +8,10 @@ namespace Qase_Test.Utils
     {
         private readonly WebDriverWait _wait;
 
-        public Waiters(IWebDriver driver, TimeSpan timeOut)
-        {
+        public Waiters(IWebDriver driver, TimeSpan timeOut) =>
             _wait = new WebDriverWait(driver, timeOut);
-        }
 
-        public IWebElement WaitForVisibility(By by)
-        {
-            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
-        }
+        public IWebElement WaitForVisibility(By by) =>
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
     }
 }

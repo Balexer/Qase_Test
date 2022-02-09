@@ -7,6 +7,8 @@ namespace Qase_Test.Core
 {
     public static class ReadProperties
     {
+        private const string AppSettings = "appSettings";
+        private const string Json = "json";
         private static readonly Lazy<IConfiguration> Configurations;
 
         private static IConfiguration Configuration => Configurations.Value;
@@ -23,6 +25,11 @@ namespace Qase_Test.Core
 
         public static string HomeUrl => Configuration[nameof(HomeUrl)];
 
+        static ReadProperties()
+        {
+            Configurations = new Lazy<IConfiguration>(BuildConfiguration);
+        }
+
         private static IConfiguration BuildConfiguration()
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -30,9 +37,9 @@ namespace Qase_Test.Core
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
                 .AddJsonFile(
-                    $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}appSettings.json");
+                    $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}{AppSettings}.{Json}");
 
-            var appSettingFiles = Directory.EnumerateFiles(basePath, "appsettings.*.json");
+            var appSettingFiles = Directory.EnumerateFiles(basePath, $"{AppSettings}.*.{Json}");
 
             foreach (var appSettingFile in appSettingFiles)
             {
@@ -40,11 +47,6 @@ namespace Qase_Test.Core
             }
 
             return builder.Build();
-        }
-
-        static ReadProperties()
-        {
-            Configurations = new Lazy<IConfiguration>(BuildConfiguration);
         }
     }
 }
