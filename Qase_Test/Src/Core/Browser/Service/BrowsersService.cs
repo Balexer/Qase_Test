@@ -18,7 +18,7 @@ namespace Qase_Test.Core.Browser.Service
         {
             switch (ReadProperties.Browser.ToLower())
             {
-                //DEV_NOTE: I will realise more browsers
+                //DEV_NOTE: I will realise more browsers (FireFox)
                 case Chrome:
                     GetDriver = new ChromeDriver(GetBrowserOptions.GetChromeOptions());
                     break;
