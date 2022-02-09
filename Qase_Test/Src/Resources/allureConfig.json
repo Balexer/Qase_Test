@@ -1,5 +1,8 @@
 {
   "allure": {
-    "directory": "allure-results"
+    "directory": "allure-results",
+    "links": [
+      "https://app.qase.io/case/{tms}"
+    ]
   }
 }

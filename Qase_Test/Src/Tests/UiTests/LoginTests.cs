@@ -26,8 +26,7 @@ namespace Qase_Test.Tests.UiTests
 
         [Test]
         [AllureSubSuite("Log In")]
-        [AllureStep("LogIn with correct credentials")]
-        [AllureLink("Test Case", "https://app.qase.io/project/AA?previewMode=side&view=1&suite=3&case=30")]
+        [AllureTms("AA-30")]
         public void LoginTest()
         {
             _loginSteps.Login(ModelsSettings.GetUser());
@@ -41,7 +40,6 @@ namespace Qase_Test.Tests.UiTests
 
         [Test]
         [AllureSubSuite("Log In")]
-        [AllureStep("LogIn with incorrect credentials")]
         public void LoginWithWrongCreedsTest()
         {
             _loginSteps.Login(UserFaker.GetFakeUser());
