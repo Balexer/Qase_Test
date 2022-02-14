@@ -3,9 +3,9 @@ using Qase_Test.Core.Browser.Service;
 
 namespace Qase_Test.Wrappers
 {
-    public static class Wrappers
+    public static class Input
     {
-        public static void Input(string locator, string value)
+        public static void InputValue(string locator, string value)
         {
             var element = BrowsersService.GetWaiters.WaitForVisibility(By.Id($"input{locator}"));
             element.Clear();

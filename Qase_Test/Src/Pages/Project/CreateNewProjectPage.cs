@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
+using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages.Project
 {
@@ -14,13 +15,13 @@ namespace Qase_Test.Pages.Project
         }
 
         public static void SetProjectName(string projectName) =>
-            Wrappers.Wrappers.Input("Title", projectName);
+            Input.InputValue("Title", projectName);
 
         public static void SetProjectCode(string projectCode) =>
-            Wrappers.Wrappers.Input("Code", projectCode);
+            Input.InputValue("Code", projectCode);
 
         public static void SetProjectDescription(string projectDescription) =>
-            Wrappers.Wrappers.Input("Description", projectDescription);
+            Input.InputValue("Description", projectDescription);
 
         public void CreateProjectButtonClick() =>
             GetElement(_createProjectButtonSelector).Click();
