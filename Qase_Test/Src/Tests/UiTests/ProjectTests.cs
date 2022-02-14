@@ -1,6 +1,7 @@
 using FluentAssertions;
 using NUnit.Allure.Attributes;
 using NUnit.Framework;
+using Qase_Test.Fakers;
 using Qase_Test.Models;
 using Qase_Test.Pages;
 using Qase_Test.Pages.Base;
@@ -16,6 +17,7 @@ namespace Qase_Test.Tests.UiTests
         private ProjectSteps _projectSteps;
         private ProjectPage _projectPage;
         private ProjectSettingsPage _projectSettingsPage;
+        private Project _project;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +26,8 @@ namespace Qase_Test.Tests.UiTests
             _projectSteps = new ProjectSteps();
             _projectPage = new ProjectPage();
             _projectSettingsPage = new ProjectSettingsPage();
-
+            
+            _project = ProjectFaker.GetFakeProject();
             _loginSteps.Login(ModelsSettings.GetUser());
         }
 
@@ -32,43 +35,43 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void CreateProjectTest()
         {
-            _projectSteps.CreateNewProject(ModelsSettings.GetProject());
+            _projectSteps.CreateNewProject(_project);
 
-            ModelsSettings.GetProject().ProjectName.Should().Be(ProjectPage.GetTitle());
+            _project.ProjectName.Should().Be(ProjectPage.GetTitle());
             _projectPage.MoveToProjectSettingsPage();
-            ModelsSettings.GetProject().ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
+            _project.ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
         }
 
         [Test]
         [AllureSubSuite("Project")]
         public void DeleteProjectFromProjectMenuTest()
         {
-            _projectSteps.CreateNewProject(ModelsSettings.GetProject());
+            _projectSteps.CreateNewProject(_project);
 
-            _projectSteps.DeleteProjectFromHomePage(ModelsSettings.GetProject());
+            _projectSteps.DeleteProjectFromHomePage(_project);
 
-            HomePage.FindProjectByName(ModelsSettings.GetProject().ProjectName).Should().BeFalse();
+            HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
 
         [Test]
         [AllureSubSuite("Project")]
         public void DeleteProjectFromProjectPageTest()
         {
-            _projectSteps.CreateNewProject(ModelsSettings.GetProject());
+            _projectSteps.CreateNewProject(_project);
 
             _projectSteps.DeleteProjectFromProjectPage();
 
-            HomePage.FindProjectByName(ModelsSettings.GetProject().ProjectName).Should().BeFalse();
+            HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
 
         [Test]
         [AllureSubSuite("Project")]
         public void CreateProjectWithExistingCodeTest()
         {
-            _projectSteps.CreateNewProject(ModelsSettings.GetProject());
+            _projectSteps.CreateNewProject(_project);
             _projectPage.MoveToHomePage();
 
-            _projectSteps.CreateNewProject(ModelsSettings.GetProject());
+            _projectSteps.CreateNewProject(_project);
 
             CreateNewProjectPage.GetErrorCodeMessage().Should().Be("Project with the same code already exists.");
         }

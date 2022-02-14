@@ -2,7 +2,6 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Allure.Attributes;
 using NUnit.Framework;
-using Qase_Test.Core;
 using Qase_Test.Core.Browser.Service;
 using Qase_Test.Fakers;
 using Qase_Test.Models;

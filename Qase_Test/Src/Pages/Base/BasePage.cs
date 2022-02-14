@@ -44,12 +44,5 @@ namespace Qase_Test.Pages.Base
 
         public static string GetErrorMessage() =>
             GetElement(By.ClassName(ErrorMessageSelector)).Text;
-
-        protected static void Input(string locator, string value)
-        {
-            var element = GetElement(By.Id($"input{locator}"));
-            element.Clear();
-            element.SendKeys(value);
-        }
     }
 }
