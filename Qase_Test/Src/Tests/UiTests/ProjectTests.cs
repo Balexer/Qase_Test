@@ -3,6 +3,7 @@ using NUnit.Allure.Attributes;
 using NUnit.Framework;
 using Qase_Test.Models;
 using Qase_Test.Pages;
+using Qase_Test.Pages.Base;
 using Qase_Test.Pages.Project;
 using Qase_Test.Steps.UiSteps;
 using Qase_Test.Tests.Base;
@@ -14,6 +15,7 @@ namespace Qase_Test.Tests.UiTests
         private LoginSteps _loginSteps;
         private ProjectSteps _projectSteps;
         private ProjectPage _projectPage;
+        private ProjectSettingsPage _projectSettingsPage;
 
         [SetUp]
         public void SetUp()
@@ -21,6 +23,7 @@ namespace Qase_Test.Tests.UiTests
             _loginSteps = new LoginSteps();
             _projectSteps = new ProjectSteps();
             _projectPage = new ProjectPage();
+            _projectSettingsPage = new ProjectSettingsPage();
 
             _loginSteps.Login(ModelsSettings.GetUser());
         }
@@ -32,7 +35,8 @@ namespace Qase_Test.Tests.UiTests
             _projectSteps.CreateNewProject(ModelsSettings.GetProject());
 
             ModelsSettings.GetProject().ProjectName.Should().Be(ProjectPage.GetTitle());
-            _projectSteps.DeleteProjectFromProjectPage();
+            _projectPage.MoveToProjectSettingsPage();
+            ModelsSettings.GetProject().ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
         }
 
         [Test]
@@ -75,7 +79,7 @@ namespace Qase_Test.Tests.UiTests
         {
             _projectSteps.CreateNewProject(ModelsSettings.GetInvalidProject());
 
-            CreateNewProjectPage.GetErrorMessage().Should().Be("The code must be at least 2 characters.");
+            BasePage.GetErrorMessage().Should().Be("The code must be at least 2 characters.");
         }
     }
 }

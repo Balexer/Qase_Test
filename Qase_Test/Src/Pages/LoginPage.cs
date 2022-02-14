@@ -9,26 +9,19 @@ namespace Qase_Test.Pages
         private readonly By _inputLoginSelector = By.Id("inputEmail");
         private readonly By _inputPasswordSelector = By.Id("inputPassword");
         private readonly By _loginButtonSelector = By.Id("btnLogin");
-        private const string ErrorMessageSelector = "form-control-feedback";
         private static readonly By LogInPageSelector = By.Id("Symbols");
 
         public LoginPage() : base(LogInPageSelector)
         {
         }
 
-        private static IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters.WaitForVisibility(locator);
-
         public void SetEmail(string email) =>
-            GetElement(_inputLoginSelector).SendKeys(email);
+            Input("Email", email);
 
         public void SetPassword(string password) =>
-            GetElement(_inputPasswordSelector).SendKeys(password);
+            Input("Password", password);
 
         public void LoginButtonClick() =>
             GetElement(_loginButtonSelector).Click();
-
-        public string GetErrorMessage() =>
-            GetElement(By.ClassName(ErrorMessageSelector)).Text;
     }
 }

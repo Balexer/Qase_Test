@@ -1,3 +1,4 @@
+using NLog;
 using OpenQA.Selenium;
 using Qase_Test.Core.Browser.Service;
 using Qase_Test.Pages.Base;
@@ -9,49 +10,42 @@ namespace Qase_Test.Pages
         private static readonly By HomePageSelector = By.XPath("//h1[text()='Projects']");
         private readonly By _createNewProjectButtonSelector = By.Id("createButton");
         private const string ProjectSelector = "//a[text()='replace']";
-
         private const string DropDownDeleteSelector =
             "//a[@aria-expanded='true']/following-sibling::div/div/a[@class='text-danger']";
-
         private readonly string _projectDropdownMenuSelector =
             $"{ProjectSelector}/../../following-sibling::td[@class='text-end']/div/a";
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public HomePage() : base(HomePageSelector)
         {
         }
-
-        private static IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters.WaitForVisibility(locator);
 
         public static void ClickDropdownMenuDelete() =>
             GetElement(By.XPath(DropDownDeleteSelector)).Click();
 
         public static bool FindProjectByName(string projectName)
         {
-            var projectNameSelector = ProjectSelector.Replace("replace", projectName);
             try
             {
-                return GetElement(By.XPath(projectNameSelector)).Displayed;
+                return GetElement(By.XPath(ReplaceLocator(ProjectSelector, projectName))).Displayed;
             }
-            catch (NoSuchElementException)
+            catch (NoSuchElementException ex)
             {
+                Logger.Error(ex);
                 return false;
             }
-            catch (WebDriverTimeoutException)
+            catch (WebDriverTimeoutException ex)
             {
+                Logger.Error(ex);
                 return false;
             }
         }
 
-        public void CreateNewProject()
-        {
+        public void CreateNewProject() =>
             GetElement(_createNewProjectButtonSelector).Click();
-        }
 
-        public void OpenProjectDropdownMenu(string projectName)
-        {
-            var projectDropdownMenu = _projectDropdownMenuSelector.Replace("replace", projectName);
-            GetElement(By.XPath(projectDropdownMenu)).Click();
-        }
+        public void OpenProjectDropdownMenu(string projectName) =>
+            GetElement(By.XPath(ReplaceLocator(_projectDropdownMenuSelector, projectName))).Click();
     }
 }

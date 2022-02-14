@@ -21,10 +21,6 @@ namespace Qase_Test.Steps.UiSteps
             _loginPage.LoginButtonClick();
         }
 
-        [AllureStep("Get error message")]
-        public string GetErrorMessage() =>
-            _loginPage.GetErrorMessage();
-
         [AllureStep("Check is page opened")]
         public bool IsPageOpened() =>
             _loginPage.WaitForOpen();

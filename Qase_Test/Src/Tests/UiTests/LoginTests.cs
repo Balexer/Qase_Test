@@ -7,6 +7,7 @@ using Qase_Test.Core.Browser.Service;
 using Qase_Test.Fakers;
 using Qase_Test.Models;
 using Qase_Test.Pages;
+using Qase_Test.Pages.Base;
 using Qase_Test.Steps.UiSteps;
 using Qase_Test.Tests.Base;
 
@@ -33,7 +34,7 @@ namespace Qase_Test.Tests.UiTests
 
             using (new AssertionScope())
             {
-                BrowsersService.GetDriver.Url.Should().Be(ReadProperties.HomeUrl);
+                BrowsersService.GetDriver.Url.Should().Be(Constants.Constants.HomeUrn);
                 _homePage.WaitForOpen().Should().BeTrue();
             }
         }
@@ -46,7 +47,7 @@ namespace Qase_Test.Tests.UiTests
 
             using (new AssertionScope())
             {
-                _loginSteps.GetErrorMessage().Should().Be("These credentials do not match our records.");
+                BasePage.GetErrorMessage().Should().Be("These credentials do not match our records.");
                 _loginSteps.IsPageOpened().Should().BeTrue();
             }
         }

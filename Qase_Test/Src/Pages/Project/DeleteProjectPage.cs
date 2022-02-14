@@ -13,10 +13,7 @@ namespace Qase_Test.Pages.Project
         {
         }
 
-        private static IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters.WaitForVisibility(locator);
-
-        public void ConfirmTheDelete() =>
+        public void ConfirmDelete() =>
             GetElement(_deleteProjectButtonSelector).Click();
     }
 }

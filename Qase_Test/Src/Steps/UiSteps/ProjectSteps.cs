@@ -26,18 +26,18 @@ namespace Qase_Test.Steps.UiSteps
         public void CreateNewProject(Project project)
         {
             _homePage.CreateNewProject();
-            _createNewProjectPage.SetProjectName(project.ProjectName);
-            _createNewProjectPage.SetProjectCode(project.ProjectCode);
-            _createNewProjectPage.SetProjectDiscription(project.ProjectDescription);
+            CreateNewProjectPage.SetProjectName(project.ProjectName);
+            CreateNewProjectPage.SetProjectCode(project.ProjectCode);
+            CreateNewProjectPage.SetProjectDescription(project.ProjectDescription);
             _createNewProjectPage.CreateProjectButtonClick();
         }
 
         [AllureStep("Deletion project from project page")]
         public void DeleteProjectFromProjectPage()
         {
-            _projectPage.MoveToProjectSettings();
+            _projectPage.MoveToProjectSettingsPage();
             _projectSettingsPage.ClickDeleteProject();
-            _deleteProjectPage.ConfirmTheDelete();
+            _deleteProjectPage.ConfirmDelete();
         }
 
         [AllureStep("Deletion project from home page")]
@@ -46,7 +46,7 @@ namespace Qase_Test.Steps.UiSteps
             _projectPage.MoveToHomePage();
             _homePage.OpenProjectDropdownMenu(project.ProjectName);
             HomePage.ClickDropdownMenuDelete();
-            _deleteProjectPage.ConfirmTheDelete();
+            _deleteProjectPage.ConfirmDelete();
         }
     }
 }
