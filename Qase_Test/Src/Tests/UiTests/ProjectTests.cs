@@ -31,7 +31,7 @@ namespace Qase_Test.Tests.UiTests
             _loginSteps.Login(ModelsSettings.GetUser());
         }
 
-        [Test]
+        [Test, Description("Creating a project")]
         [AllureSubSuite("Project")]
         public void CreateProjectTest()
         {
@@ -42,9 +42,9 @@ namespace Qase_Test.Tests.UiTests
             _project.ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
         }
 
-        [Test]
+        [Test, Description("Deletion project from Home page")]
         [AllureSubSuite("Project")]
-        public void DeleteProjectFromProjectMenuTest()
+        public void DeleteProjectFromHomePageTest()
         {
             _projectSteps.CreateNewProject(_project);
 
@@ -53,7 +53,7 @@ namespace Qase_Test.Tests.UiTests
             HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
 
-        [Test]
+        [Test, Description("Deletion project from Project page")]
         [AllureSubSuite("Project")]
         public void DeleteProjectFromProjectPageTest()
         {
@@ -64,7 +64,7 @@ namespace Qase_Test.Tests.UiTests
             HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
 
-        [Test]
+        [Test, Description("Create project with existing code")]
         [AllureSubSuite("Project")]
         public void CreateProjectWithExistingCodeTest()
         {
@@ -76,7 +76,7 @@ namespace Qase_Test.Tests.UiTests
             CreateNewProjectPage.GetErrorCodeMessage().Should().Be("Project with the same code already exists.");
         }
 
-        [Test]
+        [Test, Description("Create project with wrong code")]
         [AllureSubSuite("Project")]
         public void CreateProjectWithWrongCodeTest()
         {

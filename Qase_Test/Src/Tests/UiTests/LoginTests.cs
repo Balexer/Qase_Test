@@ -2,6 +2,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using NUnit.Allure.Attributes;
 using NUnit.Framework;
+using Qase_Test.Constants;
 using Qase_Test.Core.Browser.Service;
 using Qase_Test.Fakers;
 using Qase_Test.Models;
@@ -24,7 +25,7 @@ namespace Qase_Test.Tests.UiTests
             _homePage = new HomePage();
         }
 
-        [Test]
+        [Test, Description("Log in with correct credentials")]
         [AllureSubSuite("Log In")]
         [AllureTms("AA-30")]
         public void LoginTest()
@@ -33,12 +34,12 @@ namespace Qase_Test.Tests.UiTests
 
             using (new AssertionScope())
             {
-                BrowsersService.GetDriver.Url.Should().Be(Constants.Constants.HomeUrn);
+                BrowsersService.GetDriver.Url.Should().Be(UriConstants.HomeUri);
                 _homePage.WaitForOpen().Should().BeTrue();
             }
         }
 
-        [Test]
+        [Test, Description("Log in with wrong credentials")]
         [AllureSubSuite("Log In")]
         public void LoginWithWrongCreedsTest()
         {

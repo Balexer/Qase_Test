@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
+using Qase_Test.Utils;
 
 namespace Qase_Test.Pages.Project
 {
@@ -14,9 +15,9 @@ namespace Qase_Test.Pages.Project
         }
 
         public void ClickDeleteProject() =>
-            GetElement(_deleteProjectButtonSelector).Click();
+            WebElementActions.GetElement(_deleteProjectButtonSelector).Click();
 
         public string GetProjectDescription() =>
-            GetElement(_descriptionSelector).Text;
+            WebElementActions.GetElement(_descriptionSelector).Text;
     }
 }

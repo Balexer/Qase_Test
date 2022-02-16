@@ -1,6 +1,7 @@
 using NLog;
 using OpenQA.Selenium;
 using Qase_Test.Core.Browser.Service;
+using Qase_Test.Utils;
 
 namespace Qase_Test.Pages.Base
 {
@@ -8,7 +9,7 @@ namespace Qase_Test.Pages.Base
     {
         private readonly By _locator;
         private const string ErrorMessageSelector = "form-control-feedback";
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         protected BasePage(By locator)
         {
@@ -33,16 +34,10 @@ namespace Qase_Test.Pages.Base
             }
         }
 
-        protected static string ReplaceLocator(string locator, string elementName)
-        {
-            var newLocator = locator.Replace("replace", elementName);
-            return newLocator;
-        }
-
-        protected static IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters.WaitForVisibility(locator);
+        protected static By ReplaceLocator(string locator, string elementName) =>
+            By.XPath(locator.Replace("replace", elementName));
 
         public static string GetErrorMessage() =>
-            GetElement(By.ClassName(ErrorMessageSelector)).Text;
+            WebElementActions.GetElement(By.ClassName(ErrorMessageSelector)).Text;
     }
 }

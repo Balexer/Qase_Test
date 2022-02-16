@@ -1,11 +1,12 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
+using Qase_Test.Utils;
 
 namespace Qase_Test.Pages.Project
 {
     public class ProjectPage : BasePage
     {
-        private const string TitleSelector = "//p[@class='header']";
+        private static readonly By TitleSelector = By.XPath("//p[@class='header']");
         private static readonly By ProjectPageSelector = By.XPath("//span[text()='Suites']");
         private readonly By _settingsSelector = By.XPath("//a[@data-bs-original-title='Settings']");
         private readonly By _projectsButtonSelector = By.XPath("//a[@aria-label='Projects']");
@@ -15,12 +16,12 @@ namespace Qase_Test.Pages.Project
         }
 
         public static string GetTitle() =>
-            GetElement(By.XPath(TitleSelector)).Text;
+            WebElementActions.GetElement(TitleSelector).Text;
 
         public void MoveToProjectSettingsPage() =>
-            GetElement(_settingsSelector).Click();
+            WebElementActions.GetElement(_settingsSelector).Click();
 
         public void MoveToHomePage() =>
-            GetElement(_projectsButtonSelector).Click();
+            WebElementActions.GetElement(_projectsButtonSelector).Click();
     }
 }

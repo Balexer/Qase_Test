@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
+using Qase_Test.Utils;
 using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages
@@ -14,12 +15,12 @@ namespace Qase_Test.Pages
         }
 
         public static void SetEmail(string email) =>
-            Input.InputValue("Email", email);
+            Input.CleanInputValue("Email", email);
 
         public static void SetPassword(string password) =>
-            Input.InputValue("Password", password);
+            Input.CleanInputValue("Password", password);
 
         public void LoginButtonClick() =>
-            GetElement(_loginButtonSelector).Click();
+            WebElementActions.GetElement(_loginButtonSelector).Click();
     }
 }
