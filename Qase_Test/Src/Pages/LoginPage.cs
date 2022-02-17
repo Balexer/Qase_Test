@@ -8,13 +8,13 @@ namespace Qase_Test.Pages
     public class LoginPage : BasePage
     {
         private readonly By _loginButtonSelector = By.Id("btnLogin");
-        private readonly By _emailSelector = By.Id("inputEmail");
-        private readonly By _passwordSelector = By.Id("inputPassword");
         private static readonly By LogInPageSelector = By.Id("Symbols");
+        private const string EmailLabel = "Email";
+        private const string PasswordLabel = "Password";
 
-        private Input EmailInput => new Input(_emailSelector);
+        private Input EmailInput => new(EmailLabel);
 
-        private Input PasswordInput => new Input(_passwordSelector);
+        private Input PasswordInput => new(PasswordLabel);
 
         public LoginPage() : base(LogInPageSelector)
         {

@@ -10,15 +10,15 @@ namespace Qase_Test.Pages.Project
         private static readonly By ErrorCodeMessage = By.ClassName("alert-message");
         private static readonly By CreateProjectPageSelector = By.XPath("//h1[text()='New Project']");
         private readonly By _createProjectButtonSelector = By.CssSelector(".btn.btn-primary");
-        private readonly By _projectNameSelector = By.Id("inputTitle");
-        private readonly By _projectCodeSelector = By.Id("inputCode");
-        private readonly By _projectDescriptionSelector = By.Id("inputDescription");
+        private const string ProjectNameLabel = "Title";
+        private const string ProjectCodeLabel = "Code";
+        private const string ProjectDescriptionLabel = "Description";
 
-        private Input ProjectNameInput => new(_projectNameSelector);
+        private Input ProjectNameInput => new(ProjectNameLabel);
 
-        private Input ProjectCodeInput => new(_projectCodeSelector);
+        private Input ProjectCodeInput => new(ProjectCodeLabel);
 
-        private Input ProjectDescriptionInput => new(_projectDescriptionSelector);
+        private Input ProjectDescriptionInput => new(ProjectDescriptionLabel);
 
         public CreateNewProjectPage() : base(CreateProjectPageSelector)
         {

@@ -8,9 +8,9 @@ namespace Qase_Test.Wrappers
     {
         private IWebElement _element;
 
-        public Input(By locator)
+        public Input(string locator)
         {
-            _element = WebElementActions.GetElement(locator);
+            _element = WebElementActions.GetElement(By.Id($"input{locator}"));
         }
 
         public void ClearAndSendKey(string value)
