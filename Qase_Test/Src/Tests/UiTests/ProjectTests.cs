@@ -16,7 +16,6 @@ namespace Qase_Test.Tests.UiTests
         private LoginSteps _loginSteps;
         private ProjectSteps _projectSteps;
         private ProjectPage _projectPage;
-        private ProjectSettingsPage _projectSettingsPage;
         private Project _project;
 
         [SetUp]
@@ -25,10 +24,9 @@ namespace Qase_Test.Tests.UiTests
             _loginSteps = new LoginSteps();
             _projectSteps = new ProjectSteps();
             _projectPage = new ProjectPage();
-            _projectSettingsPage = new ProjectSettingsPage();
-            
+
             _project = ProjectFaker.GetFakeProject();
-            _loginSteps.Login(ModelsSettings.GetUser());
+            _loginSteps.Login(FakeManager.GetUser());
         }
 
         [Test, Description("Creating a project")]
@@ -39,7 +37,7 @@ namespace Qase_Test.Tests.UiTests
 
             _project.ProjectName.Should().Be(ProjectPage.GetTitle());
             _projectPage.MoveToProjectSettingsPage();
-            _project.ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
+            _project.ProjectDescription.Should().Be(ProjectSettingsPage.GetProjectDescription());
         }
 
         [Test, Description("Deletion project from Home page")]
@@ -80,7 +78,7 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void CreateProjectWithWrongCodeTest()
         {
-            _projectSteps.CreateNewProject(ModelsSettings.GetInvalidProject());
+            _projectSteps.CreateNewProject(FakeManager.GetInvalidProject());
 
             BasePage.GetErrorMessage().Should().Be("The code must be at least 2 characters.");
         }

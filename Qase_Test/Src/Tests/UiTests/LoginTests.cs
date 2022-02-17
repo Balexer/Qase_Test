@@ -30,7 +30,7 @@ namespace Qase_Test.Tests.UiTests
         [AllureTms("AA-30")]
         public void LoginTest()
         {
-            _loginSteps.Login(ModelsSettings.GetUser());
+            _loginSteps.Login(FakeManager.GetUser());
 
             using (new AssertionScope())
             {

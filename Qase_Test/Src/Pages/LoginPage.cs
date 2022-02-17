@@ -15,10 +15,10 @@ namespace Qase_Test.Pages
         }
 
         public static void SetEmail(string email) =>
-            Input.CleanInputValue("Email", email);
+            Input.ClearAndSendKey("Email", email);
 
         public static void SetPassword(string password) =>
-            Input.CleanInputValue("Password", password);
+            Input.ClearAndSendKey("Password", password);
 
         public void LoginButtonClick() =>
             WebElementActions.GetElement(_loginButtonSelector).Click();

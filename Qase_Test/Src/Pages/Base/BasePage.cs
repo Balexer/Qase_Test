@@ -8,7 +8,7 @@ namespace Qase_Test.Pages.Base
     public abstract class BasePage
     {
         private readonly By _locator;
-        private const string ErrorMessageSelector = "form-control-feedback";
+        private static readonly By ErrorMessageSelector = By.ClassName("form-control-feedback");
         protected static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         protected BasePage(By locator)
@@ -24,12 +24,12 @@ namespace Qase_Test.Pages.Base
             }
             catch (NoSuchElementException ex)
             {
-                Logger.Info(ex);
+                Logger.Info(ex.Message);
                 return false;
             }
             catch (WebDriverTimeoutException ex)
             {
-                Logger.Info(ex);
+                Logger.Info(ex.Message);
                 return false;
             }
         }
@@ -38,6 +38,6 @@ namespace Qase_Test.Pages.Base
             By.XPath(locator.Replace("replace", elementName));
 
         public static string GetErrorMessage() =>
-            WebElementActions.GetElement(By.ClassName(ErrorMessageSelector)).Text;
+            WebElementActions.GetElement(ErrorMessageSelector).Text;
     }
 }

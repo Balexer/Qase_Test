@@ -6,16 +6,22 @@ namespace Qase_Test.Wrappers
 {
     public static class Input
     {
-        public static void CleanInputValue(string label, string value)
+        public static void ClearAndSendKey(string label, string value)
         {
-            ClearField(label);
+            Clear(label);
             SendKeys(label, value);
         }
 
-        private static void ClearField(string label) =>
-            WebElementActions.GetElement(By.Id($"input{label}")).Clear();
+        public static string GetText(string label) =>
+            GetInputElement(label).Text;
+
+        private static void Clear(string label) =>
+            GetInputElement(label).Clear();
 
         private static void SendKeys(string label, string value) =>
-            WebElementActions.GetElement(By.Id($"input{label}")).SendKeys(value);
+            GetInputElement(label).SendKeys(value);
+
+        private static IWebElement GetInputElement(string label) =>
+            WebElementActions.GetElement(By.Id($"input{label}"));
     }
 }
