@@ -26,9 +26,9 @@ namespace Qase_Test.Steps.UiSteps
         public void CreateNewProject(Project project)
         {
             _homePage.CreateNewProject();
-            CreateNewProjectPage.SetProjectName(project.ProjectName);
-            CreateNewProjectPage.SetProjectCode(project.ProjectCode);
-            CreateNewProjectPage.SetProjectDescription(project.ProjectDescription);
+            _createNewProjectPage.SetProjectName(project.ProjectName);
+            _createNewProjectPage.SetProjectCode(project.ProjectCode);
+            _createNewProjectPage.SetProjectDescription(project.ProjectDescription);
             _createNewProjectPage.CreateProjectButtonClick();
         }
 
@@ -45,7 +45,7 @@ namespace Qase_Test.Steps.UiSteps
         {
             _projectPage.MoveToHomePage();
             _homePage.OpenProjectDropdownMenu(project.ProjectName);
-            HomePage.ClickDropdownMenuDelete();
+            _homePage.ClickDropdownMenuDelete();
             _deleteProjectPage.ConfirmDelete();
         }
     }

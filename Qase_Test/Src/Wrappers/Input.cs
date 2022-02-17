@@ -4,24 +4,28 @@ using Qase_Test.Utils;
 
 namespace Qase_Test.Wrappers
 {
-    public static class Input
+    public class Input
     {
-        public static void ClearAndSendKey(string label, string value)
+        private IWebElement _element;
+
+        public Input(By locator)
         {
-            Clear(label);
-            SendKeys(label, value);
+            _element = WebElementActions.GetElement(locator);
         }
 
-        public static string GetText(string label) =>
-            GetInputElement(label).Text;
+        public void ClearAndSendKey(string value)
+        {
+            Clear();
+            SendKeys(value);
+        }
 
-        private static void Clear(string label) =>
-            GetInputElement(label).Clear();
+        public string GetText() =>
+            _element.Text;
 
-        private static void SendKeys(string label, string value) =>
-            GetInputElement(label).SendKeys(value);
+        private void Clear() =>
+            _element.Clear();
 
-        private static IWebElement GetInputElement(string label) =>
-            WebElementActions.GetElement(By.Id($"input{label}"));
+        private void SendKeys(string value) =>
+            _element.SendKeys(value);
     }
 }

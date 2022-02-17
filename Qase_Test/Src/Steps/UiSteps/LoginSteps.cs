@@ -16,8 +16,8 @@ namespace Qase_Test.Steps.UiSteps
         [AllureStep("Try to LogIn")]
         public void Login(User user)
         {
-            LoginPage.SetEmail(user.Email);
-            LoginPage.SetPassword(user.Password);
+            _loginPage.SetEmail(user.Email);
+            _loginPage.SetPassword(user.Password);
             _loginPage.LoginButtonClick();
         }
 

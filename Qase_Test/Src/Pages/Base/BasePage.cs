@@ -27,11 +27,6 @@ namespace Qase_Test.Pages.Base
                 Logger.Info(ex.Message);
                 return false;
             }
-            catch (WebDriverTimeoutException ex)
-            {
-                Logger.Info(ex.Message);
-                return false;
-            }
         }
 
         protected static By ReplaceLocator(string locator, string elementName) =>

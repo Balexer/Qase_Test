@@ -8,17 +8,23 @@ namespace Qase_Test.Pages
     public class LoginPage : BasePage
     {
         private readonly By _loginButtonSelector = By.Id("btnLogin");
+        private readonly By _emailSelector = By.Id("inputEmail");
+        private readonly By _passwordSelector = By.Id("inputPassword");
         private static readonly By LogInPageSelector = By.Id("Symbols");
+
+        private Input EmailInput => new Input(_emailSelector);
+
+        private Input PasswordInput => new Input(_passwordSelector);
 
         public LoginPage() : base(LogInPageSelector)
         {
         }
 
-        public static void SetEmail(string email) =>
-            Input.ClearAndSendKey("Email", email);
+        public void SetEmail(string email) =>
+            EmailInput.ClearAndSendKey(email);
 
-        public static void SetPassword(string password) =>
-            Input.ClearAndSendKey("Password", password);
+        public void SetPassword(string password) =>
+            PasswordInput.ClearAndSendKey(password);
 
         public void LoginButtonClick() =>
             WebElementActions.GetElement(_loginButtonSelector).Click();
