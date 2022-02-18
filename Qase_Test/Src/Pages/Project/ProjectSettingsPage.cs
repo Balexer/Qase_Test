@@ -11,8 +11,6 @@ namespace Qase_Test.Pages.Project
         private readonly By _deleteProjectButtonSelector = By.CssSelector(".btn-cancel");
         private const string ProjectDescriptionLabel = "Description";
 
-        private Input ProjectDescriptionInput => new(ProjectDescriptionLabel);
-
         public ProjectSettingsPage() : base(ProjectSettingsPageSelector)
         {
         }
@@ -20,7 +18,7 @@ namespace Qase_Test.Pages.Project
         public void ClickDeleteProject() =>
             WebElementActions.GetElement(_deleteProjectButtonSelector).Click();
 
-        public string GetProjectDescription() =>
-            ProjectDescriptionInput.GetText();
+        public static string GetProjectDescription() =>
+            new Input(ProjectDescriptionLabel).GetText();
     }
 }

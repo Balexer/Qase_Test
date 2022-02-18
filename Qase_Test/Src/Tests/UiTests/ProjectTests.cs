@@ -16,7 +16,6 @@ namespace Qase_Test.Tests.UiTests
         private ProjectSteps _projectSteps;
         private ProjectPage _projectPage;
         private Project _project;
-        private ProjectSettingsPage _projectSettingsPage;
         private User _user;
 
         [SetUp]
@@ -25,7 +24,6 @@ namespace Qase_Test.Tests.UiTests
             LoginSteps = new LoginSteps();
             _projectSteps = new ProjectSteps();
             _projectPage = new ProjectPage();
-            _projectSettingsPage = new ProjectSettingsPage();
             _user = new User();
 
             _project = ProjectFaker.GetFakeProject();
@@ -40,7 +38,7 @@ namespace Qase_Test.Tests.UiTests
 
             _project.ProjectName.Should().Be(ProjectPage.GetTitle());
             _projectPage.MoveToProjectSettingsPage();
-            _project.ProjectDescription.Should().Be(_projectSettingsPage.GetProjectDescription());
+            _project.ProjectDescription.Should().Be(ProjectSettingsPage.GetProjectDescription());
         }
 
         [Test, Description("Deletion project from Home page")]

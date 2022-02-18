@@ -26,9 +26,9 @@ namespace Qase_Test.Steps.UiSteps
         public void CreateNewProject(Project project)
         {
             _homePage.CreateNewProject();
-            _createNewProjectPage.SetProjectName(project.ProjectName);
-            _createNewProjectPage.SetProjectCode(project.ProjectCode);
-            _createNewProjectPage.SetProjectDescription(project.ProjectDescription);
+            CreateNewProjectPage.SetProjectName(project.ProjectName);
+            CreateNewProjectPage.SetProjectCode(project.ProjectCode);
+            CreateNewProjectPage.SetProjectDescription(project.ProjectDescription);
             _createNewProjectPage.CreateProjectButtonClick();
         }
 

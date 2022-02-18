@@ -14,24 +14,18 @@ namespace Qase_Test.Pages.Project
         private const string ProjectCodeLabel = "Code";
         private const string ProjectDescriptionLabel = "Description";
 
-        private Input ProjectNameInput => new(ProjectNameLabel);
-
-        private Input ProjectCodeInput => new(ProjectCodeLabel);
-
-        private Input ProjectDescriptionInput => new(ProjectDescriptionLabel);
-
         public CreateNewProjectPage() : base(CreateProjectPageSelector)
         {
         }
 
-        public void SetProjectName(string projectName) =>
-            ProjectNameInput.ClearAndSendKey(projectName);
+        public static void SetProjectName(string projectName) =>
+            new Input(ProjectNameLabel).ClearAndSendKey(projectName);
 
-        public void SetProjectCode(string projectCode) =>
-            ProjectCodeInput.ClearAndSendKey(projectCode);
+        public static void SetProjectCode(string projectCode) =>
+            new Input(ProjectCodeLabel).ClearAndSendKey(projectCode);
 
-        public void SetProjectDescription(string projectDescription) =>
-            ProjectDescriptionInput.ClearAndSendKey(projectDescription);
+        public static void SetProjectDescription(string projectDescription) =>
+            new Input(ProjectDescriptionLabel).ClearAndSendKey(projectDescription);
 
         public void CreateProjectButtonClick() =>
             WebElementActions.GetElement(_createProjectButtonSelector).Click();

@@ -12,19 +12,15 @@ namespace Qase_Test.Pages
         private const string EmailLabel = "Email";
         private const string PasswordLabel = "Password";
 
-        private Input EmailInput => new(EmailLabel);
-
-        private Input PasswordInput => new(PasswordLabel);
-
         public LoginPage() : base(LogInPageSelector)
         {
         }
 
-        public void SetEmail(string email) =>
-            EmailInput.ClearAndSendKey(email);
+        public static void SetEmail(string email) =>
+            new Input(EmailLabel).ClearAndSendKey(email);
 
-        public void SetPassword(string password) =>
-            PasswordInput.ClearAndSendKey(password);
+        public static void SetPassword(string password) =>
+            new Input(PasswordLabel).ClearAndSendKey(password);
 
         public void LoginButtonClick() =>
             WebElementActions.GetElement(_loginButtonSelector).Click();

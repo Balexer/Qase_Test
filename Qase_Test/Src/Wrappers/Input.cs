@@ -6,7 +6,7 @@ namespace Qase_Test.Wrappers
 {
     public class Input
     {
-        private IWebElement _element;
+        private readonly IWebElement _element;
 
         public Input(string locator)
         {

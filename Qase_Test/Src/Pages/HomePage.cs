@@ -9,7 +9,7 @@ namespace Qase_Test.Pages
     {
         private static readonly By HomePageSelector = By.XPath("//h1[text()='Projects']");
         private const string ProjectSelector = "//a[text()='replace']";
-        private readonly By DropDownDeleteSelector =
+        private readonly By _dropDownDeleteSelector =
             By.XPath("//a[@aria-expanded='true']/following-sibling::div/div/a[@class='text-danger']");
         private readonly By _createNewProjectButtonSelector = By.Id("createButton");
         private readonly string _projectDropdownMenuSelector =
@@ -20,7 +20,7 @@ namespace Qase_Test.Pages
         }
 
         public void ClickDropdownMenuDelete() =>
-            WebElementActions.GetElement(DropDownDeleteSelector).Click();
+            WebElementActions.GetElement(_dropDownDeleteSelector).Click();
 
         public static bool FindProjectByName(string projectName)
         {
@@ -28,7 +28,7 @@ namespace Qase_Test.Pages
             {
                 return WebElementActions.GetElement(ReplaceLocator(ProjectSelector, projectName)).Displayed;
             }
-            catch (NoSuchElementException ex)
+            catch (WebDriverTimeoutException ex)
             {
                 Logger.Error(ex.Message);
                 return false;

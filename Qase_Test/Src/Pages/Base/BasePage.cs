@@ -22,7 +22,7 @@ namespace Qase_Test.Pages.Base
             {
                 return BrowsersService.GetWaiters.WaitForVisibility(_locator).Displayed;
             }
-            catch (NoSuchElementException ex)
+            catch (WebDriverTimeoutException ex)
             {
                 Logger.Info(ex.Message);
                 return false;
