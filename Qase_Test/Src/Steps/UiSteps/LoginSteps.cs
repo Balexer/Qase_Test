@@ -16,14 +16,10 @@ namespace Qase_Test.Steps.UiSteps
         [AllureStep("Try to LogIn")]
         public void Login(User user)
         {
-            _loginPage.SetEmail(user.Email);
-            _loginPage.SetPassword(user.Password);
+            LoginPage.SetEmail(user.Email);
+            LoginPage.SetPassword(user.Password);
             _loginPage.LoginButtonClick();
         }
-
-        [AllureStep("Get error message")]
-        public string GetErrorMessage() =>
-            _loginPage.GetErrorMessage();
 
         [AllureStep("Check is page opened")]
         public bool IsPageOpened() =>

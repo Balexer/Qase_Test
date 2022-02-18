@@ -10,6 +10,8 @@ namespace Qase_Test.Core
         private const string AppSettings = "appSettings";
         private const string Json = "json";
         private static readonly Lazy<IConfiguration> Configurations;
+        private static readonly string Filepath =
+            $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}{AppSettings}.{Json}";
 
         private static IConfiguration Configuration => Configurations.Value;
 
@@ -23,8 +25,6 @@ namespace Qase_Test.Core
 
         public static string Password => Configuration[nameof(Password)];
 
-        public static string HomeUrl => Configuration[nameof(HomeUrl)];
-
         static ReadProperties()
         {
             Configurations = new Lazy<IConfiguration>(BuildConfiguration);
@@ -36,8 +36,7 @@ namespace Qase_Test.Core
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile(
-                    $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}{AppSettings}.{Json}");
+                .AddJsonFile(Filepath);
 
             var appSettingFiles = Directory.EnumerateFiles(basePath, $"{AppSettings}.*.{Json}");
 

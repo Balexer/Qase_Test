@@ -4,6 +4,7 @@ using NUnit.Allure.Core;
 using NUnit.Framework;
 using Qase_Test.Core;
 using Qase_Test.Core.Browser.Service;
+using Qase_Test.Steps.UiSteps;
 
 namespace Qase_Test.Tests.Base
 {
@@ -14,6 +15,8 @@ namespace Qase_Test.Tests.Base
     [AllureSuite("Smoke")]
     public abstract class BaseTest
     {
+        protected LoginSteps LoginSteps;
+
         [SetUp]
         [AllureStep("Open browser, and setup Browser and Waiters")]
         public void OpenPage()
@@ -21,6 +24,7 @@ namespace Qase_Test.Tests.Base
             BrowsersService.SetupBrowser();
             BrowsersService.SetupWaiters();
             BrowsersService.GetDriver.Navigate().GoToUrl(ReadProperties.Url);
+            LoginSteps = new LoginSteps();
         }
 
         [TearDown]

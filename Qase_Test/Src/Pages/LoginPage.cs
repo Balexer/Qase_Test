@@ -1,34 +1,28 @@
 using OpenQA.Selenium;
-using Qase_Test.Core.Browser.Service;
 using Qase_Test.Pages.Base;
+using Qase_Test.Utils;
+using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages
 {
     public class LoginPage : BasePage
     {
-        private readonly By _inputLoginSelector = By.Id("inputEmail");
-        private readonly By _inputPasswordSelector = By.Id("inputPassword");
         private readonly By _loginButtonSelector = By.Id("btnLogin");
-        private const string ErrorMessageSelector = "form-control-feedback";
         private static readonly By LogInPageSelector = By.Id("Symbols");
+        private const string EmailLabel = "Email";
+        private const string PasswordLabel = "Password";
 
         public LoginPage() : base(LogInPageSelector)
         {
         }
 
-        private static IWebElement GetElement(By locator) =>
-            BrowsersService.GetWaiters.WaitForVisibility(locator);
+        public static void SetEmail(string email) =>
+            new Input(EmailLabel).ClearAndSendKey(email);
 
-        public void SetEmail(string email) =>
-            GetElement(_inputLoginSelector).SendKeys(email);
-
-        public void SetPassword(string password) =>
-            GetElement(_inputPasswordSelector).SendKeys(password);
+        public static void SetPassword(string password) =>
+            new Input(PasswordLabel).ClearAndSendKey(password);
 
         public void LoginButtonClick() =>
-            GetElement(_loginButtonSelector).Click();
-
-        public string GetErrorMessage() =>
-            GetElement(By.ClassName(ErrorMessageSelector)).Text;
+            WebElementActions.GetElement(_loginButtonSelector).Click();
     }
 }
