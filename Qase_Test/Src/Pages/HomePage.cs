@@ -1,4 +1,3 @@
-using NLog;
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
 using Qase_Test.Utils;
@@ -40,5 +39,8 @@ namespace Qase_Test.Pages
 
         public void OpenProjectDropdownMenu(string projectName) =>
             WebElementActions.GetElement(ReplaceLocator(_projectDropdownMenuSelector, projectName)).Click();
+
+        public static void OpenProjectByName(string projectName) =>
+            WebElementActions.GetElement(ReplaceLocator(ProjectSelector, projectName)).Click();
     }
 }

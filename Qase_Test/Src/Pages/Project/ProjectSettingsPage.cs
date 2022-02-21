@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using Qase_Test.Core.Browser.Service;
 using Qase_Test.Pages.Base;
 using Qase_Test.Utils;
 using Qase_Test.Wrappers;
@@ -15,8 +16,17 @@ namespace Qase_Test.Pages.Project
         {
         }
 
-        public void ClickDeleteProject() =>
-            WebElementActions.GetElement(_deleteProjectButtonSelector).Click();
+        public void ClickDeleteProject()
+        {
+            try
+            {
+                BrowsersService.GetDriver.SwitchTo().Alert().Accept();
+            }
+            catch (NoAlertPresentException)
+            {
+                WebElementActions.GetElement(_deleteProjectButtonSelector).Click();
+            }
+        }
 
         public static string GetProjectDescription() =>
             new Input(ProjectDescriptionLabel).GetText();
