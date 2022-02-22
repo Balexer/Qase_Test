@@ -1,4 +1,5 @@
 using FluentAssertions;
+using NUnit.Allure.Attributes;
 using NUnit.Framework;
 using Qase_Test.Fakers;
 using Qase_Test.Models;
@@ -16,22 +17,19 @@ namespace Qase_Test.Tests.UiTests
         private CreateTestCasePage _createTestCasePage;
         private ProjectPage _projectPage;
         private Project _project;
-        private User _user;
         private TestCase _testCase;
 
         [SetUp]
         public void SetUp()
         {
-            LoginSteps = new LoginSteps();
             _projectSteps = new ProjectSteps();
             _testCasesSteps = new TestCasesSteps();
             _projectPage = new ProjectPage();
             _createTestCasePage = new CreateTestCasePage();
-            _user = new User();
 
             _testCase = TestCaseFaker.GetFakeCase();
             _project = ProjectFaker.GetFakeProject();
-            LoginSteps.Login(_user);
+            LoginSteps.Login(User);
             _projectSteps.CreateNewProject(_project);
             _projectPage.MoveToHomePage();
         }
@@ -42,24 +40,27 @@ namespace Qase_Test.Tests.UiTests
             _projectSteps.DeleteProjectFromProjectPage();
         }
 
-        [Test]
-        public void CreateDefaultTestCaseTest()
+        [Test, Description("Creating a test case only with required fields, the rest are default")]
+        [AllureSubSuite("TestCase")]
+        public void CreateTestCaseWithRequiredFields()
         {
             var defaultTestCase = new TestCase();
-            _testCasesSteps.CreateTestCaseInProject(_project, defaultTestCase);
+            _testCasesSteps.CreateDefaultTestCase(_project, defaultTestCase);
 
             _testCasesSteps.GetTestCase(defaultTestCase).Should().BeEquivalentTo(defaultTestCase);
         }
 
-        [Test]
-        public void CreateTestCase()
+        [Test, Description("Creating a test case with filling in all fields")]
+        [AllureSubSuite("TestCase")]
+        public void CreateTestCaseWithAllFields()
         {
             _testCasesSteps.CreateTestCaseInProject(_project, _testCase);
 
             _testCasesSteps.GetTestCase(_testCase).Should().BeEquivalentTo(_testCase);
         }
 
-        [Test]
+        [Test, Description("Creating a test case without name")]
+        [AllureSubSuite("TestCase")]
         public void CreateTestCaseWithoutName()
         {
             _testCase.CaseTitle = "";

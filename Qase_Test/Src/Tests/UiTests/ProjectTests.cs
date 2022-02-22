@@ -16,18 +16,15 @@ namespace Qase_Test.Tests.UiTests
         private ProjectSteps _projectSteps;
         private ProjectPage _projectPage;
         private Project _project;
-        private User _user;
 
         [SetUp]
         public void SetUp()
         {
-            LoginSteps = new LoginSteps();
             _projectSteps = new ProjectSteps();
             _projectPage = new ProjectPage();
-            _user = new User();
 
             _project = ProjectFaker.GetFakeProject();
-            LoginSteps.Login(_user);
+            LoginSteps.Login(User);
         }
 
         [Test, Description("Creating a project")]

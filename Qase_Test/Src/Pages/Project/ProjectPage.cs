@@ -16,7 +16,6 @@ namespace Qase_Test.Pages.Project
         private readonly By _quiteWindowModeSelector = By.XPath("//i[@class='fal fa-times']");
         private const string TextPropertySelector = "//h3[text()='replace']/..//p";
         private const string DropDownPropertySelector = "//span[text()='replace']/..//div//div";
-        private readonly By _alertSelector = By.XPath("//div[@role='alert']");
 
         public ProjectPage() : base(ProjectPageSelector)
         {
@@ -37,38 +36,16 @@ namespace Qase_Test.Pages.Project
         public static void SelectTestCase(string caseName) =>
             WebElementActions.GetElement(ReplaceLocator(TestCaseSelector, caseName)).Click();
 
-        public void ChooseWindowMode()
-        {
-            while (IsAlertVisible())
-            {
-            }
-
-            WebElementActions.GetElement(_windowModeSelector).Click();
-        }
+        public void ChooseWindowMode() =>
+            WebElementActions.JsClick(_windowModeSelector);
 
         public void QuiteWindowMode() =>
-            WebElementActions.GetElement(_quiteWindowModeSelector).Click();
+            WebElementActions.JsClick(_quiteWindowModeSelector);
 
         public static string GetTestCaseTextProperty(string propertyName) =>
             WebElementActions.GetElement(ReplaceLocator(TextPropertySelector, propertyName)).Text;
 
         public static string GetTestCaseDropDownProperty(string propertyName) =>
             WebElementActions.GetElement(ReplaceLocator(DropDownPropertySelector, propertyName)).Text;
-
-        private bool IsAlertVisible()
-        {
-            try
-            {
-                return WebElementActions.GetElementWithoutWaiters(_alertSelector).Displayed;
-            }
-            catch (StaleElementReferenceException)
-            {
-                return false;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
     }
 }

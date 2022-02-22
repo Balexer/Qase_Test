@@ -8,11 +8,11 @@ namespace Qase_Test.Pages.Project
 {
     public class ProjectSettingsPage : BasePage
     {
-        private static readonly By ProjectSettingsPageSelector = By.XPath("//h1[text()='Settings']");
         private readonly By _deleteProjectButtonSelector = By.CssSelector(".btn-cancel");
         private const string ProjectDescriptionLabel = "Description";
+        private const string ProjectSettingsTitleText = "Settings";
 
-        public ProjectSettingsPage() : base(ProjectSettingsPageSelector)
+        public ProjectSettingsPage() : base(new Title(ProjectSettingsTitleText).GetLocator())
         {
         }
 
@@ -22,8 +22,9 @@ namespace Qase_Test.Pages.Project
             {
                 BrowsersService.GetDriver.SwitchTo().Alert().Accept();
             }
-            catch (NoAlertPresentException)
+            catch (NoAlertPresentException ex)
             {
+                Logger.Error(ex.Message);
                 WebElementActions.GetElement(_deleteProjectButtonSelector).Click();
             }
         }

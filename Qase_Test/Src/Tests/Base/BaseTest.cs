@@ -4,6 +4,7 @@ using NUnit.Allure.Core;
 using NUnit.Framework;
 using Qase_Test.Core;
 using Qase_Test.Core.Browser.Service;
+using Qase_Test.Models;
 using Qase_Test.Steps.UiSteps;
 
 namespace Qase_Test.Tests.Base
@@ -16,6 +17,8 @@ namespace Qase_Test.Tests.Base
     public abstract class BaseTest
     {
         protected LoginSteps LoginSteps;
+
+        protected static User User => new();
 
         [SetUp]
         [AllureStep("Open browser, and setup Browser and Waiters")]
