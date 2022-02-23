@@ -45,7 +45,7 @@ namespace Qase_Test.Tests.UiTests
         public void CreateTestCaseWithRequiredFields()
         {
             var defaultTestCase = new TestCase();
-            _testCasesSteps.CreateDefaultTestCase(_project, defaultTestCase);
+            _testCasesSteps.CreateDefaultTestCase(_project, defaultTestCase); //fills only the title
 
             _testCasesSteps.GetTestCase(defaultTestCase).Should().BeEquivalentTo(defaultTestCase);
         }
@@ -54,7 +54,7 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("TestCase")]
         public void CreateTestCaseWithAllFields()
         {
-            _testCasesSteps.CreateTestCaseInProject(_project, _testCase);
+            _testCasesSteps.CreateTestCaseInProject(_project, _testCase); //fills in all fields of the test case
 
             _testCasesSteps.GetTestCase(_testCase).Should().BeEquivalentTo(_testCase);
         }
