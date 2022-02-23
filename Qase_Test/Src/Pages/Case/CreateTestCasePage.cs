@@ -1,7 +1,6 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
 using Qase_Test.Utils;
-using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages.Case
 {
@@ -15,9 +14,9 @@ namespace Qase_Test.Pages.Case
             $"{LabelSelector}//div[@class='ProseMirror toastui-editor-contents']";
         private readonly string _propertyButtonSelector = $"{LabelSelector}/div";
         private const string DropDownPropertySelector = "//div[text()='replace']";
-        private const string CreateTestCaseTitleText = "Create test case";
+        private static readonly By CreateTestCaseTitleText = By.XPath($"//h1[text()='Create test case']");
 
-        public CreateTestCasePage() : base(new Title(CreateTestCaseTitleText).GetLocator())
+        public CreateTestCasePage() : base(CreateTestCaseTitleText)
         {
         }
 
