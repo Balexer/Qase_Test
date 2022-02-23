@@ -9,12 +9,12 @@ namespace Qase_Test.Pages.Project
     {
         private static readonly By ErrorCodeMessage = By.ClassName("alert-message");
         private readonly By _createProjectButtonSelector = By.CssSelector(".btn.btn-primary");
-        private const string CreateProjectTitleText = "New Project";
+        private static readonly By CreateProjectTitleText = By.XPath($"//h1[text()='New Project']");
         private const string ProjectNameLabel = "Title";
         private const string ProjectCodeLabel = "Code";
         private const string ProjectDescriptionLabel = "Description";
 
-        public CreateNewProjectPage() : base(new Title(CreateProjectTitleText).GetLocator())
+        public CreateNewProjectPage() : base(CreateProjectTitleText)
         {
         }
 

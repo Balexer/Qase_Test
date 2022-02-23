@@ -1,7 +1,6 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
 using Qase_Test.Utils;
-using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages
 {
@@ -10,12 +9,12 @@ namespace Qase_Test.Pages
         private readonly By _dropDownDeleteSelector =
             By.XPath("//a[@aria-expanded='true']/following-sibling::div/div/a[@class='text-danger']");
         private readonly By _createNewProjectButtonSelector = By.Id("createButton");
-        private const string HomePageTitleText = "Projects";
+        private static readonly By HomePageTitleText = By.XPath($"//h1[text()='Projects']");
         private const string ProjectSelector = "//a[text()='replace']";
         private readonly string _projectDropdownMenuSelector =
             $"{ProjectSelector}/../../following-sibling::td[@class='text-end']/div/a";
 
-        public HomePage() : base(new Title(HomePageTitleText).GetLocator())
+        public HomePage() : base(HomePageTitleText)
         {
         }
 

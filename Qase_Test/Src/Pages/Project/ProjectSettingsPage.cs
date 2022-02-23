@@ -10,9 +10,9 @@ namespace Qase_Test.Pages.Project
     {
         private readonly By _deleteProjectButtonSelector = By.CssSelector(".btn-cancel");
         private const string ProjectDescriptionLabel = "Description";
-        private const string ProjectSettingsTitleText = "Settings";
+        private static readonly By ProjectSettingsTitleText = By.XPath($"//h1[text()='Settings']");
 
-        public ProjectSettingsPage() : base(new Title(ProjectSettingsTitleText).GetLocator())
+        public ProjectSettingsPage() : base(ProjectSettingsTitleText)
         {
         }
 
