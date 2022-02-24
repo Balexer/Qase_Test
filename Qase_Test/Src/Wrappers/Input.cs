@@ -4,13 +4,11 @@ using Qase_Test.Utils;
 
 namespace Qase_Test.Wrappers
 {
-    public class Input
+    public class Input : BaseElement
     {
-        private readonly IWebElement _element;
-
-        public Input(string locator)
+        public Input(string label)
         {
-            _element = WebElementActions.GetElement(By.Id($"input{locator}"));
+            Element = GetElement(By.Id($"input{label}"));
         }
 
         public void ClearAndSendKey(string value)
@@ -20,12 +18,12 @@ namespace Qase_Test.Wrappers
         }
 
         public string GetText() =>
-            _element.Text;
+            Element.Text;
 
         private void Clear() =>
-            _element.Clear();
+            Element.Clear();
 
         private void SendKeys(string value) =>
-            _element.SendKeys(value);
+            Element.SendKeys(value);
     }
 }

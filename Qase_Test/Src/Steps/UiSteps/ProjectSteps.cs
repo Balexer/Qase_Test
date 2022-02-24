@@ -7,46 +7,41 @@ namespace Qase_Test.Steps.UiSteps
 {
     public class ProjectSteps
     {
-        private readonly CreateNewProjectPage _createNewProjectPage;
-        private readonly DeleteProjectPage _deleteProjectPage;
-        private readonly ProjectPage _projectPage;
-        private readonly ProjectSettingsPage _projectSettingsPage;
-        private readonly HomePage _homePage;
+        private static CreateNewProjectPage CreateNewProjectPage => new();
 
-        public ProjectSteps()
-        {
-            _createNewProjectPage = new CreateNewProjectPage();
-            _deleteProjectPage = new DeleteProjectPage();
-            _projectPage = new ProjectPage();
-            _projectSettingsPage = new ProjectSettingsPage();
-            _homePage = new HomePage();
-        }
+        private static DeleteProjectPage DeleteProjectPage => new();
+
+        private static ProjectPage ProjectPage => new();
+
+        private static ProjectSettingsPage ProjectSettingsPage => new();
+
+        private static HomePage HomePage => new();
 
         [AllureStep("Try to Create a project")]
-        public void CreateNewProject(Project project)
+        public static void CreateNewProject(Project project)
         {
-            _homePage.CreateNewProject();
+            HomePage.CreateNewProject();
             CreateNewProjectPage.SetProjectName(project.ProjectName);
             CreateNewProjectPage.SetProjectCode(project.ProjectCode);
             CreateNewProjectPage.SetProjectDescription(project.ProjectDescription);
-            _createNewProjectPage.CreateProjectButtonClick();
+            CreateNewProjectPage.CreateProjectButtonClick();
         }
 
         [AllureStep("Deletion project from project page")]
-        public void DeleteProjectFromProjectPage()
+        public static void DeleteProjectFromProjectPage()
         {
-            _projectPage.MoveToProjectSettingsPage();
-            _projectSettingsPage.ClickDeleteProject();
-            _deleteProjectPage.ConfirmDelete();
+            ProjectPage.MoveToProjectSettingsPage();
+            ProjectSettingsPage.ClickDeleteProject();
+            DeleteProjectPage.ConfirmDelete();
         }
 
         [AllureStep("Deletion project from home page")]
-        public void DeleteProjectFromHomePage(Project project)
+        public static void DeleteProjectFromHomePage(Project project)
         {
-            _projectPage.MoveToHomePage();
-            _homePage.OpenProjectDropdownMenu(project.ProjectName);
-            _homePage.ClickDropdownMenuDelete();
-            _deleteProjectPage.ConfirmDelete();
+            ProjectPage.MoveToHomePage();
+            HomePage.OpenProjectDropdownMenu(project.ProjectName);
+            HomePage.ClickDropdownMenuDelete();
+            DeleteProjectPage.ConfirmDelete();
         }
     }
 }

@@ -1,20 +1,18 @@
 using OpenQA.Selenium;
 using Qase_Test.Pages.Base;
-using Qase_Test.Utils;
 using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages.Project
 {
     public class CreateNewProjectPage : BasePage
     {
-        private static readonly By ErrorCodeMessage = By.ClassName("alert-message");
-        private readonly By _createProjectButtonSelector = By.CssSelector(".btn.btn-primary");
-        private static readonly By CreateProjectTitleText = By.XPath($"//h1[text()='New Project']");
         private const string ProjectNameLabel = "Title";
         private const string ProjectCodeLabel = "Code";
         private const string ProjectDescriptionLabel = "Description";
+        private static readonly By ErrorCodeMessage = By.ClassName("alert-message");
+        private readonly By _createProjectButtonSelector = By.CssSelector(".btn.btn-primary");
 
-        public CreateNewProjectPage() : base(CreateProjectTitleText)
+        public CreateNewProjectPage() : base(By.XPath($"//h1[text()='New Project']"))
         {
         }
 
@@ -28,9 +26,9 @@ namespace Qase_Test.Pages.Project
             new Input(ProjectDescriptionLabel).ClearAndSendKey(projectDescription);
 
         public void CreateProjectButtonClick() =>
-            WebElementActions.GetElement(_createProjectButtonSelector).Click();
+            BaseElement.GetElement(_createProjectButtonSelector).Click();
 
         public static string GetErrorCodeMessage() =>
-            WebElementActions.GetElement(ErrorCodeMessage).Text;
+            BaseElement.GetElement(ErrorCodeMessage).Text;
     }
 }

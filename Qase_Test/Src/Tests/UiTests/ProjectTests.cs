@@ -13,17 +13,13 @@ namespace Qase_Test.Tests.UiTests
 {
     public class ProjectTests : BaseTest
     {
-        private ProjectSteps _projectSteps;
-        private ProjectPage _projectPage;
+        private static ProjectPage ProjectPage => new();
         private Project _project;
 
         [SetUp]
         public void SetUp()
         {
-            _projectSteps = new ProjectSteps();
-            _projectPage = new ProjectPage();
-
-            _project = ProjectFaker.GetFakeProject();
+            _project = TestDataGeneratorService.GetFakeProject();
             LoginSteps.Login(User);
         }
 
@@ -31,10 +27,10 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void CreateProjectTest()
         {
-            _projectSteps.CreateNewProject(_project); //just creates a project
+            ProjectSteps.CreateNewProject(_project);
 
             _project.ProjectName.Should().Be(ProjectPage.GetTitle());
-            _projectPage.MoveToProjectSettingsPage();
+            ProjectPage.MoveToProjectSettingsPage();
             _project.ProjectDescription.Should().Be(ProjectSettingsPage.GetProjectDescription());
         }
 
@@ -42,20 +38,20 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void DeleteProjectFromHomePageTest()
         {
-            _projectSteps.CreateNewProject(_project); //preconditions
+            ProjectSteps.CreateNewProject(_project);
 
-            _projectSteps.DeleteProjectFromHomePage(_project);
+            ProjectSteps.DeleteProjectFromHomePage(_project);
 
             HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
-        //there are two methods for deleting a project from the HomePage, and from the ProjectPage itself, I check both
+
         [Test, Description("Deletion project from Project page")]
         [AllureSubSuite("Project")]
         public void DeleteProjectFromProjectPageTest()
         {
-            _projectSteps.CreateNewProject(_project);
+            ProjectSteps.CreateNewProject(_project);
 
-            _projectSteps.DeleteProjectFromProjectPage();
+            ProjectSteps.DeleteProjectFromProjectPage();
 
             HomePage.FindProjectByName(_project.ProjectName).Should().BeFalse();
         }
@@ -64,10 +60,10 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void CreateProjectWithExistingCodeTest()
         {
-            _projectSteps.CreateNewProject(_project); //Preconditions: creates a project
-            _projectPage.MoveToHomePage();
+            ProjectSteps.CreateNewProject(_project);
+            ProjectPage.MoveToHomePage();
 
-            _projectSteps.CreateNewProject(_project); //trying to create a project with the same code
+            ProjectSteps.CreateNewProject(_project);
 
             CreateNewProjectPage.GetErrorCodeMessage().Should().Be("Project with the same code already exists.");
         }
@@ -76,10 +72,10 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Project")]
         public void CreateProjectWithWrongCodeTest()
         {
-            var project = ProjectFaker.GetFakeProject();
-            project.ProjectCode = project.WrongProjectCode; //a project can be created with a code of at least two characters, I create with one
+            var project = TestDataGeneratorService.GetFakeProject();
+            project.ProjectCode = project.WrongProjectCode;
 
-            _projectSteps.CreateNewProject(project);
+            ProjectSteps.CreateNewProject(project);
 
             BasePage.GetErrorMessage().Should().Be("The code must be at least 2 characters.");
         }

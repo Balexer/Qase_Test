@@ -4,8 +4,8 @@ namespace Qase_Test.Models
 {
     public class User
     {
-        public string Email { get; set; } = ReadProperties.Email;
+        public string Email { get; set; } = UserSettings.Email;
 
-        public string Password { get; set; } = ReadProperties.Password;
+        public string Password { get; set; } = UserSettings.Password;
     }
 }

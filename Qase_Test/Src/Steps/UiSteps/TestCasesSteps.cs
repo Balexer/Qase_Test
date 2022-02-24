@@ -9,52 +9,48 @@ namespace Qase_Test.Steps.UiSteps
 {
     public class TestCasesSteps
     {
-        private readonly ProjectPage _projectPage;
-        private readonly CreateTestCasePage _createTestCasePage;
+        private static ProjectPage ProjectPage => new();
+
+        private static CreateTestCasePage CreateTestCasePage => new();
+
         private const string Preconditions = "Preconditions";
         private const string Postconditions = "Postconditions";
         private const string AutomationStatus = "Automation";
 
-        public TestCasesSteps()
-        {
-            _projectPage = new ProjectPage();
-            _createTestCasePage = new CreateTestCasePage();
-        }
-
         [AllureStep("Create test case in project")]
-        public void CreateTestCaseInProject(Project project, TestCase testCase)
+        public static void CreateTestCaseInProject(Project project, TestCase testCase)
         {
             HomePage.OpenProjectByName(project.ProjectName);
-            _projectPage.CreateTestCase();
-            _createTestCasePage.SetTitle(testCase.CaseTitle);
-            _createTestCasePage.SetTextProperty(testCase.Description, TestCaseConstants.DescriptionProperty);
-            _createTestCasePage.SetTextProperty(testCase.Preconditions, TestCaseConstants.PreconditionsProperty);
-            _createTestCasePage.SetTextProperty(testCase.Postconditions, TestCaseConstants.PostconditionsProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Severity, TestCaseConstants.SeverityProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Status, TestCaseConstants.StatusProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Priority, TestCaseConstants.PriorityProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Behavior, TestCaseConstants.BehaviorProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Type, TestCaseConstants.TypeProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.IsFlaky, TestCaseConstants.IsFlakyProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Layer, TestCaseConstants.LayerProperty);
-            _createTestCasePage.SetDropDownProperty(testCase.Automation, TestCaseConstants.AutomationProperty);
-            _createTestCasePage.SaveTestCase();
+            ProjectPage.CreateTestCase();
+            CreateTestCasePage.SetTitle(testCase.CaseTitle);
+            CreateTestCasePage.SetTextProperty(testCase.Description, TestCaseConstants.DescriptionProperty);
+            CreateTestCasePage.SetTextProperty(testCase.Preconditions, TestCaseConstants.PreconditionsProperty);
+            CreateTestCasePage.SetTextProperty(testCase.Postconditions, TestCaseConstants.PostconditionsProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Severity, TestCaseConstants.SeverityProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Status, TestCaseConstants.StatusProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Priority, TestCaseConstants.PriorityProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Behavior, TestCaseConstants.BehaviorProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Type, TestCaseConstants.TypeProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.IsFlaky, TestCaseConstants.IsFlakyProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Layer, TestCaseConstants.LayerProperty);
+            CreateTestCasePage.SetDropDownProperty(testCase.Automation, TestCaseConstants.AutomationProperty);
+            CreateTestCasePage.SaveTestCase();
         }
 
         [AllureStep("Create test case with required fields")]
-        public void CreateDefaultTestCase(Project project, TestCase testCase)
+        public static void CreateDefaultTestCase(Project project, TestCase testCase)
         {
             HomePage.OpenProjectByName(project.ProjectName);
-            _projectPage.CreateTestCase();
-            _createTestCasePage.SetTitle(testCase.CaseTitle);
-            _createTestCasePage.SaveTestCase();
+            ProjectPage.CreateTestCase();
+            CreateTestCasePage.SetTitle(testCase.CaseTitle);
+            CreateTestCasePage.SaveTestCase();
         }
 
         [AllureStep("Get information from test case")]
-        public TestCase GetTestCase(TestCase testCase)
+        public static TestCase GetTestCase(TestCase testCase)
         {
             ProjectPage.SelectTestCase(testCase.CaseTitle);
-            _projectPage.ChooseWindowMode();
+            ProjectPage.ChooseWindowMode();
             var actualTestCase = new TestCase()
             {
                 CaseTitle = testCase.CaseTitle,
@@ -70,7 +66,7 @@ namespace Qase_Test.Steps.UiSteps
                 Layer = ProjectPage.GetTestCaseDropDownProperty(TestCaseConstants.LayerProperty),
                 Automation = ProjectPage.GetTestCaseDropDownProperty(AutomationStatus)
             };
-            _projectPage.QuiteWindowMode();
+            ProjectPage.QuiteWindowMode();
             return actualTestCase;
         }
     }

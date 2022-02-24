@@ -7,19 +7,14 @@ using Qase_Test.Core.Browser.Service;
 using Qase_Test.Fakers;
 using Qase_Test.Pages;
 using Qase_Test.Pages.Base;
+using Qase_Test.Steps.UiSteps;
 using Qase_Test.Tests.Base;
 
 namespace Qase_Test.Tests.UiTests
 {
     public class LoginTests : BaseTest
     {
-        private HomePage _homePage;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _homePage = new HomePage();
-        }
+        private static HomePage HomePage => new();
 
         [Test, Description("Log in with correct credentials")]
         [AllureSubSuite("Log In")]
@@ -30,8 +25,8 @@ namespace Qase_Test.Tests.UiTests
 
             using (new AssertionScope())
             {
-                BrowsersService.GetDriver.Url.Should().Be(UriConstants.HomeUri);
-                _homePage.WaitForOpen().Should().BeTrue();
+                BrowsersService.Driver.Url.Should().Be(UriConstants.HomeUri);
+                HomePage.WaitForOpen().Should().BeTrue();
             }
         }
 
@@ -39,7 +34,7 @@ namespace Qase_Test.Tests.UiTests
         [AllureSubSuite("Log In")]
         public void LoginWithWrongCreedsTest()
         {
-            LoginSteps.Login(UserFaker.GetFakeUser());
+            LoginSteps.Login(TestDataGeneratorService.GetFakeUser());
 
             using (new AssertionScope())
             {
