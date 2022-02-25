@@ -7,16 +7,6 @@ namespace Qase_Test.Steps.UiSteps
 {
     public class ProjectSteps
     {
-        private static CreateNewProjectPage CreateNewProjectPage => new();
-
-        private static DeleteProjectPage DeleteProjectPage => new();
-
-        private static ProjectPage ProjectPage => new();
-
-        private static ProjectSettingsPage ProjectSettingsPage => new();
-
-        private static HomePage HomePage => new();
-
         [AllureStep("Try to Create a project")]
         public static void CreateNewProject(Project project)
         {

@@ -7,14 +7,14 @@ namespace Qase_Test.Pages.Project
 {
     public class ProjectSettingsPage : BasePage
     {
-        private const string ProjectDescriptionLabel = "Description";
-        private readonly By _deleteProjectButtonSelector = By.CssSelector(".btn-cancel");
+        private static readonly By ProjectDescriptionSelector = By.Id("inputDescription");
+        private static readonly By DeleteProjectButtonSelector = By.CssSelector(".btn-cancel");
 
         public ProjectSettingsPage() : base(By.XPath($"//h1[text()='Settings']"))
         {
         }
 
-        public void ClickDeleteProject()
+        public static void ClickDeleteProject()
         {
             try
             {
@@ -23,11 +23,11 @@ namespace Qase_Test.Pages.Project
             catch (NoAlertPresentException ex)
             {
                 Logger.Error(ex.Message);
-                BaseElement.GetElement(_deleteProjectButtonSelector).Click();
+                new Button(DeleteProjectButtonSelector).Click();
             }
         }
 
         public static string GetProjectDescription() =>
-            new Input(ProjectDescriptionLabel).GetText();
+            new Input(ProjectDescriptionSelector).GetText();
     }
 }

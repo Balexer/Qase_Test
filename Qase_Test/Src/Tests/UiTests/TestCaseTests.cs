@@ -17,9 +17,6 @@ namespace Qase_Test.Tests.UiTests
 
         private static CreateTestCasePage CreateTestCasePage => new();
 
-        private static ProjectPage ProjectPage => new();
-
-
         [SetUp]
         public void SetUp()
         {

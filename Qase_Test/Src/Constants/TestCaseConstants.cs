@@ -17,7 +17,7 @@ namespace Qase_Test.Constants
         public const string AutomationProperty = "Automation status";
 
         public static readonly List<string> Severity = new()
-            {"Not set", "Blocker", "Critical", "Major", "Normal", "Minor", "Trivial"};
+            {"Blocker", "Critical", "Major", "Normal", "Minor", "Trivial"};
         public static readonly List<string> Status = new() {"Actual", "Draft", "Deprecated"};
         public static readonly List<string> Priority = new() {"Not set", "High", "Medium", "Low"};
         public static readonly List<string> Behavior = new() {"Not set", "Positive", "Negative", "Destructive"};

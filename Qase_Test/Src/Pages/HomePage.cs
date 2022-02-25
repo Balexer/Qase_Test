@@ -7,39 +7,30 @@ namespace Qase_Test.Pages
     public class HomePage : BasePage
     {
         private const string ProjectSelector = "//a[text()='replace']";
-        private readonly By _dropDownDeleteSelector =
+        private static readonly By DropDownDeleteSelector =
             By.XPath("//a[@aria-expanded='true']/following-sibling::div/div/a[@class='text-danger']");
-        private readonly By _createNewProjectButtonSelector = By.Id("createButton");
-        private readonly string _projectDropdownMenuSelector =
+        private static readonly By CreateNewProjectButtonSelector = By.Id("createButton");
+        private static readonly string ProjectDropdownMenuSelector =
             $"{ProjectSelector}/../../following-sibling::td[@class='text-end']/div/a";
 
         public HomePage() : base(By.XPath($"//h1[text()='Projects']"))
         {
         }
 
-        public void ClickDropdownMenuDelete() =>
-            BaseElement.GetElement(_dropDownDeleteSelector).Click();
+        public static void ClickDropdownMenuDelete() =>
+            new Button(DropDownDeleteSelector).Click();
 
-        public static bool FindProjectByName(string projectName)
-        {
-            try
-            {
-                return BaseElement.GetElement(ReplaceLocator(ProjectSelector, projectName)).Displayed;
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                Logger.Error(ex.Message);
-                return false;
-            }
-        }
+        public static bool FindProjectByName(string projectName) =>
+            new Text(ReplaceLocator(ProjectSelector, projectName)).IsDisplayed();
 
-        public void CreateNewProject() =>
-            BaseElement.GetElement(_createNewProjectButtonSelector).Click();
 
-        public void OpenProjectDropdownMenu(string projectName) =>
-            BaseElement.GetElement(ReplaceLocator(_projectDropdownMenuSelector, projectName)).Click();
+        public static void CreateNewProject() =>
+            new Button(CreateNewProjectButtonSelector).Click();
+
+        public static void OpenProjectDropdownMenu(string projectName) =>
+            new Button(ReplaceLocator(ProjectDropdownMenuSelector, projectName)).Click();
 
         public static void OpenProjectByName(string projectName) =>
-            BaseElement.GetElement(ReplaceLocator(ProjectSelector, projectName)).Click();
+            new Button(ReplaceLocator(ProjectSelector, projectName)).Click();
     }
 }

@@ -11,41 +11,39 @@ namespace Qase_Test.Pages.Project
         private const string DropDownPropertySelector = "//span[text()='replace']/..//div//div";
         private const string TestCaseSelector = "//span[text()='replace']/ancestor::tr";
         private static readonly By TitleSelector = By.XPath("//p[@class='header']");
-        private readonly By _settingsSelector = By.XPath("//a[@data-bs-original-title='Settings']");
-        private readonly By _projectsButtonSelector = By.XPath("//a[@aria-label='Projects']");
-        private readonly By _createCaseButtonSelector = By.Id("create-case-button");
-        private readonly By _windowModeSelector = By.XPath("//i[@class='far fa-window-restore']");
-        private readonly By _quiteWindowModeSelector = By.XPath("//i[@class='fal fa-times']");
+        private static readonly By SettingsSelector = By.XPath("//a[@data-bs-original-title='Settings']");
+        private static readonly By ProjectsButtonSelector = By.XPath("//a[@aria-label='Projects']");
+        private static readonly By CreateCaseButtonSelector = By.Id("create-case-button");
+        private static Button WindowModeSelector => new(By.XPath("//i[@class='far fa-window-restore']"));
+        private static Button QuiteWindowModeSelector => new(By.XPath("//i[@class='fal fa-times']"));
 
         public ProjectPage() : base(By.XPath("//span[text()='Suites']"))
         {
         }
 
         public static string GetTitle() =>
-            BaseElement.GetElement(TitleSelector).Text;
+            new Text(TitleSelector).GetText();
 
-        public void MoveToProjectSettingsPage() =>
-            BaseElement.GetElement(_settingsSelector).Click();
+        public static void MoveToProjectSettingsPage() =>
+            new Button(SettingsSelector).Click();
 
-        public void MoveToHomePage() =>
-            BaseElement.GetElement(_projectsButtonSelector).Click();
+        public static void MoveToHomePage() =>
+            new Button(ProjectsButtonSelector).Click();
 
-        public void CreateTestCase() =>
-            BaseElement.GetElement(_createCaseButtonSelector).Click();
+        public static void CreateTestCase() =>
+            new Button(CreateCaseButtonSelector).Click();
 
         public static void SelectTestCase(string caseName) =>
-            BaseElement.GetElement(ReplaceLocator(TestCaseSelector, caseName)).Click();
+            new Button(ReplaceLocator(TestCaseSelector, caseName)).Click();
 
-        public void ChooseWindowMode() =>
-            _windowModeSelector.JsClick();
+        public static void ChooseWindowMode() => WindowModeSelector.JsClick();
 
-        public void QuiteWindowMode() =>
-            _quiteWindowModeSelector.JsClick();
+        public static void QuiteWindowMode() => QuiteWindowModeSelector.JsClick();
 
         public static string GetTestCaseTextProperty(string propertyName) =>
-            BaseElement.GetElement(ReplaceLocator(TextPropertySelector, propertyName)).Text;
+            new Text(ReplaceLocator(TextPropertySelector, propertyName)).GetText();
 
         public static string GetTestCaseDropDownProperty(string propertyName) =>
-            BaseElement.GetElement(ReplaceLocator(DropDownPropertySelector, propertyName)).Text;
+            new Text(ReplaceLocator(DropDownPropertySelector, propertyName)).GetText();
     }
 }

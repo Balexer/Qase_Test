@@ -6,29 +6,29 @@ namespace Qase_Test.Pages.Project
 {
     public class CreateNewProjectPage : BasePage
     {
-        private const string ProjectNameLabel = "Title";
-        private const string ProjectCodeLabel = "Code";
-        private const string ProjectDescriptionLabel = "Description";
+        private static readonly By ProjectNameSelector = By.Id("inputTitle");
+        private static readonly By ProjectCodeSelector = By.Id("inputCode");
+        private static readonly By ProjectDescriptionSelector = By.Id("inputDescription");
         private static readonly By ErrorCodeMessage = By.ClassName("alert-message");
-        private readonly By _createProjectButtonSelector = By.CssSelector(".btn.btn-primary");
+        private static readonly By CreateProjectButtonSelector = By.CssSelector(".btn.btn-primary");
 
         public CreateNewProjectPage() : base(By.XPath($"//h1[text()='New Project']"))
         {
         }
 
         public static void SetProjectName(string projectName) =>
-            new Input(ProjectNameLabel).ClearAndSendKey(projectName);
+            new Input(ProjectNameSelector).ClearAndSendKey(projectName);
 
         public static void SetProjectCode(string projectCode) =>
-            new Input(ProjectCodeLabel).ClearAndSendKey(projectCode);
+            new Input(ProjectCodeSelector).ClearAndSendKey(projectCode);
 
         public static void SetProjectDescription(string projectDescription) =>
-            new Input(ProjectDescriptionLabel).ClearAndSendKey(projectDescription);
+            new Input(ProjectDescriptionSelector).ClearAndSendKey(projectDescription);
 
-        public void CreateProjectButtonClick() =>
-            BaseElement.GetElement(_createProjectButtonSelector).Click();
+        public static void CreateProjectButtonClick() =>
+            new Button(CreateProjectButtonSelector).Click();
 
         public static string GetErrorCodeMessage() =>
-            BaseElement.GetElement(ErrorCodeMessage).Text;
+            new Text(ErrorCodeMessage).GetText();
     }
 }

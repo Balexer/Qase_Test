@@ -4,7 +4,7 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Qase_Test.Constants;
 
-namespace Qase_Test.Core
+namespace Qase_Test.Utils
 {
     public class ReadProperties
     {
@@ -12,7 +12,7 @@ namespace Qase_Test.Core
         private static readonly string Filepath =
             $@"src{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}{ResourcesConstants.AppSettings}.{ResourcesConstants.Json}";
 
-        protected static IConfiguration Configuration => Configurations.Value;
+        public static IConfiguration Configuration => Configurations.Value;
 
         static ReadProperties()
         {

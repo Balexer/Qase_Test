@@ -1,14 +1,11 @@
 using OpenQA.Selenium;
-using Qase_Test.Core.Browser.Service;
-using Qase_Test.Utils;
 
 namespace Qase_Test.Wrappers
 {
     public class Input : BaseElement
     {
-        public Input(string label)
+        public Input(By locator) : base(locator)
         {
-            Element = GetElement(By.Id($"input{label}"));
         }
 
         public void ClearAndSendKey(string value)

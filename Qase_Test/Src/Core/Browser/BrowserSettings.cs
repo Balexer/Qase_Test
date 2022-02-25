@@ -1,13 +1,14 @@
 using System;
+using Qase_Test.Utils;
 
 namespace Qase_Test.Core.Browser
 {
-    public class BrowserSettings : ReadProperties
+    public class BrowserSettings
     {
-        public static string Url => Configuration[nameof(Url)];
+        public static string Url => ReadProperties.Configuration[nameof(Url)];
 
-        public static string Browser => Configuration[nameof(Browser)];
+        public static string Browser => ReadProperties.Configuration[nameof(Browser)];
 
-        public static TimeSpan Timeout => TimeSpan.FromSeconds(Convert.ToDouble(Configuration[nameof(Timeout)]));
+        public static TimeSpan Timeout => TimeSpan.FromSeconds(double.Parse(ReadProperties.Configuration[nameof(Timeout)]));
     }
 }

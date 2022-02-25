@@ -9,10 +9,6 @@ namespace Qase_Test.Steps.UiSteps
 {
     public class TestCasesSteps
     {
-        private static ProjectPage ProjectPage => new();
-
-        private static CreateTestCasePage CreateTestCasePage => new();
-
         private const string Preconditions = "Preconditions";
         private const string Postconditions = "Postconditions";
         private const string AutomationStatus = "Automation";

@@ -5,9 +5,28 @@ namespace Qase_Test.Wrappers
 {
     public abstract class BaseElement
     {
-        protected IWebElement Element;
+        private readonly By _by;
 
-        public static IWebElement GetElement(By locator) =>
+        protected BaseElement(By by)
+        {
+            _by = by;
+        }
+
+        private static IWebElement GetElement(By locator) =>
             BrowsersService.Waiters.WaitForVisibility(locator);
+
+        public IWebElement Element => GetElement(_by);
+
+        public bool IsDisplayed()
+        {
+            try
+            {
+                return Element.Displayed;
+            }
+            catch (WebDriverTimeoutException)
+            {
+                return false;
+            }
+        }
     }
 }

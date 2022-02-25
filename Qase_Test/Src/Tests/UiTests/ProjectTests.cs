@@ -13,7 +13,6 @@ namespace Qase_Test.Tests.UiTests
 {
     public class ProjectTests : BaseTest
     {
-        private static ProjectPage ProjectPage => new();
         private Project _project;
 
         [SetUp]
