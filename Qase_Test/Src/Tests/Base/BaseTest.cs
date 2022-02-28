@@ -2,11 +2,9 @@ using Allure.Commons;
 using NUnit.Allure.Attributes;
 using NUnit.Allure.Core;
 using NUnit.Framework;
-using Qase_Test.Core;
 using Qase_Test.Core.Browser;
 using Qase_Test.Core.Browser.Service;
 using Qase_Test.Models;
-using Qase_Test.Steps.UiSteps;
 
 namespace Qase_Test.Tests.Base
 {
