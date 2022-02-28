@@ -1,16 +1,11 @@
 using OpenQA.Selenium;
-using Qase_Test.Core.Browser.Service;
-using Qase_Test.Utils;
 
 namespace Qase_Test.Wrappers
 {
-    public class Input
+    public class Input : BaseElement
     {
-        private readonly IWebElement _element;
-
-        public Input(string locator)
+        public Input(By locator) : base(locator)
         {
-            _element = WebElementActions.GetElement(By.Id($"input{locator}"));
         }
 
         public void ClearAndSendKey(string value)
@@ -20,12 +15,12 @@ namespace Qase_Test.Wrappers
         }
 
         public string GetText() =>
-            _element.Text;
+            Element.Text;
 
         private void Clear() =>
-            _element.Clear();
+            Element.Clear();
 
         private void SendKeys(string value) =>
-            _element.SendKeys(value);
+            Element.SendKeys(value);
     }
 }

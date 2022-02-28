@@ -10,25 +10,30 @@ namespace Qase_Test.Core.Browser.Service
         private const string Chrome = "chrome";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        public static IWebDriver GetDriver { get; private set; }
+        public static IWebDriver Driver { get; set; }
 
-        public static Waiters GetWaiters { get; private set; }
+        public static Waiters Waiters => new(Driver, BrowserSettings.Timeout);
 
         public static void SetupBrowser()
         {
-            switch (ReadProperties.Browser.ToLower())
+            switch (BrowserSettings.Browser.ToLower())
             {
                 //DEV_NOTE: I will realise more browsers (FireFox)
                 case Chrome:
-                    GetDriver = new ChromeDriver(GetBrowserOptions.GetChromeOptions());
+                    Driver ??= new ChromeDriver(GetChromeOptions());
                     break;
                 default:
-                    Logger.Error($"Browser {ReadProperties.Browser} is not supported");
+                    Logger.Error($"Browser {BrowserSettings.Browser} is not supported");
                     break;
             }
         }
 
-        public static void SetupWaiters() =>
-            GetWaiters = new Waiters(GetDriver, ReadProperties.Timeout);
+        private static ChromeOptions GetChromeOptions()
+        {
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments("--disable-gpu", "--ignore-certificate-errors", "--silent",
+                "--start-maximized");
+            return chromeOptions;
+        }
     }
 }

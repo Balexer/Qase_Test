@@ -1,7 +1,6 @@
 using NLog;
 using OpenQA.Selenium;
-using Qase_Test.Core.Browser.Service;
-using Qase_Test.Utils;
+using Qase_Test.Wrappers;
 
 namespace Qase_Test.Pages.Base
 {
@@ -16,23 +15,12 @@ namespace Qase_Test.Pages.Base
             _locator = locator;
         }
 
-        public bool WaitForOpen()
-        {
-            try
-            {
-                return BrowsersService.GetWaiters.WaitForVisibility(_locator).Displayed;
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                Logger.Info(ex.Message);
-                return false;
-            }
-        }
+        public bool WaitForOpen() => new Text(_locator).IsDisplayed();
 
         protected static By ReplaceLocator(string locator, string elementName) =>
             By.XPath(locator.Replace("replace", elementName));
 
         public static string GetErrorMessage() =>
-            WebElementActions.GetElement(ErrorMessageSelector).Text;
+            new Text(ErrorMessageSelector).GetText();
     }
 }
