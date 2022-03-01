@@ -8,9 +8,7 @@ namespace Qase_Test.Wrappers
         {
         }
 
-        public void Click()
-        {
+        public void Click() =>
             Element.Click();
-        }
     }
 }

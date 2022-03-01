@@ -4,20 +4,16 @@ using RestSharp;
 
 namespace Qase_Test.Steps.ApiSteps.Base
 {
-    public class BaseApiStep
+    public class BaseApiHelper
     {
         [AllureStep("Authorization")]
-        protected static IRestRequest BaseRequest(Method method, string token, string parameters)
-        {
-            return AddHeaders(method, token)
+        protected static IRestRequest BaseRequest(Method method, string token, string parameters) =>
+            AddHeaders(method, token)
                 .AddParameter(ContentTypes.ApplicationJson, parameters, ParameterType.RequestBody);
-        }
 
         [AllureStep("Authorization")]
-        protected static IRestRequest BaseRequest(Method method, string token)
-        {
-            return AddHeaders(method, token);
-        }
+        protected static IRestRequest BaseRequest(Method method, string token) =>
+            AddHeaders(method, token);
 
         private static IRestRequest AddHeaders(Method method, string token)
         {
@@ -28,9 +24,7 @@ namespace Qase_Test.Steps.ApiSteps.Base
             return request;
         }
 
-        protected static RestClient Client(string baseUrl)
-        {
-            return new RestClient(baseUrl);
-        }
+        protected static RestClient Client(string baseUrl) =>
+            new(baseUrl);
     }
 }
