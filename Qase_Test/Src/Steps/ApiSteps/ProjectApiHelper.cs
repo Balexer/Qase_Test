@@ -1,5 +1,6 @@
 using System.Net;
 using NUnit.Allure.Attributes;
+using Qase_Test.Constants;
 using Qase_Test.Core;
 using Qase_Test.Models;
 using Qase_Test.Steps.ApiSteps.Base;
@@ -10,20 +11,20 @@ namespace Qase_Test.Steps.ApiSteps
 {
     public class ProjectApiHelper : BaseApiHelper
     {
-        private const string BaseUrl = "https://api.qase.io/v1/project";
+        private static string _baseUrl = $"{UriConstants.BaseApiUrl}project";
 
         [AllureStep("Try to create project")]
         public static HttpStatusCode CreateProject(Project project, string token = null)
         {
             var parameters =
                 $"{{\"title\":\"{project.ProjectName}\",\"code\":\"{project.ProjectCode}\",\"description\":\"{project.ProjectDescription}\"}}";
-            return Client(BaseUrl)
+            return Client(_baseUrl)
                 .Execute(BaseRequest(Method.POST, token ?? UserSettings.Token, parameters)).StatusCode;
         }
 
         [AllureStep("Try to delete project")]
         public static HttpStatusCode DeleteProject(Project project, string token = null) =>
-            Client($"{BaseUrl}/{project.ProjectCode}")
+            Client($"{_baseUrl}/{project.ProjectCode}")
                 .Execute(BaseRequest(Method.DELETE, token ?? UserSettings.Token)).StatusCode;
     }
 }
