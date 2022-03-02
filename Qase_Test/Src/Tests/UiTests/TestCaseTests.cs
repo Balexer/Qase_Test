@@ -28,10 +28,8 @@ namespace Qase_Test.Tests.UiTests
         }
 
         [TearDown]
-        public void TearDown()
-        {
+        public void TearDown() =>
             ProjectSteps.DeleteProjectFromProjectPage();
-        }
 
         [Test, Description("Creating a test case only with required fields, the rest are default")]
         [AllureSubSuite("TestCase")]

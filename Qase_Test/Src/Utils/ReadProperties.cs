@@ -14,10 +14,8 @@ namespace Qase_Test.Utils
 
         public static IConfiguration Configuration => Configurations.Value;
 
-        static ReadProperties()
-        {
+        static ReadProperties() =>
             Configurations = new Lazy<IConfiguration>(BuildConfiguration);
-        }
 
         private static IConfiguration BuildConfiguration()
         {

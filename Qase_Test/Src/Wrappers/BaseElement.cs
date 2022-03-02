@@ -7,10 +7,8 @@ namespace Qase_Test.Wrappers
     {
         private readonly By _by;
 
-        protected BaseElement(By by)
-        {
+        protected BaseElement(By by) =>
             _by = by;
-        }
 
         private static IWebElement GetElement(By locator) =>
             BrowsersService.Waiters.WaitForVisibility(locator);
